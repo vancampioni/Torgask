@@ -1,4 +1,11 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+const hashPassword = function (plainPassword) {
+    return bcrypt.hashSync(plainPassword, saltRounds);
+};
+
 
 module.exports = {
     async index(req, res) {
@@ -9,9 +16,14 @@ module.exports = {
 
     async create(req, res) {
         const { nome, email, senha } = req.body;
-
-        const user = await User.create({ nome, email, senha });
+        const hashedPassword = hashPassword(senha);
+        const user = await User.create({ 
+            nome: nome,
+            email: email,
+            senha: hashedPassword 
+        });
 
         return res.json(user);
-    }
+    },
+
 };
