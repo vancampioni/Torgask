@@ -6,6 +6,8 @@ const TaskController = require('./controllers/TaskController');
 
 const routes = express.Router();
 
+// Login
+routes.post('/users/login', UserController.login);
 
 // Users
 routes.get('/users', UserController.index);
