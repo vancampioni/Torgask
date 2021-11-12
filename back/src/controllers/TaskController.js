@@ -31,5 +31,45 @@ module.exports = {
         });
 
         return res.json(task);
+    },
+
+    async update(req, res) {
+        try {
+            const { goal_id } = req.params;
+
+            const { nome, anotacao, estado, data_agendada } = req.body;
+
+            const goal = await Goal.findByPk(goal_id);
+            if (!goal) {
+                return res.status(400).json({ error: 'Meta não encontrada.' });
+            }
+
+            await Task.update(
+                { nome, anotacao, estado, data_agendada },
+                {
+                    where: { goal_id: req.params.goal_id },
+                    where: { id: req.params.id }
+                }
+            )
+
+            return res.status(200).send({ message: 'Tarefa atualizada com sucesso!' });
+
+        }
+        catch {
+            return res.status(400).send({ erro: 'Falha ao atualizar tarefa.' });
+        }
+    },
+
+    async delete(req, res) {
+        try {
+            await Task.destroy({
+                where: { user_id: req.params.user_id },
+                where: { id: req.params.id }
+            });
+            return res.status(200).send({ message: 'Tarefa excluída com sucesso!' });
+        }
+        catch {
+            res.status(400).send({ erro: 'Falha ao deletar tarefa.' });
+        }
     }
 };
