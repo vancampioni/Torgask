@@ -12,6 +12,17 @@ module.exports = {
         return res.json(goal);
     },
 
+    async getById(req, res) {
+        const { goal_id } = req.params;
+
+        const goal = await Goal.findByPk(goal_id, {
+            include: { association: 'tasks' }
+        });
+
+        const task = await Task.findByPk(req.params.id);
+        return res.json(task);
+    },
+
     async create(req, res) {
         const { goal_id } = req.params;
 
