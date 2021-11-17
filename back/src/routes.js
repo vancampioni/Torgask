@@ -38,10 +38,11 @@ routes.put('/users/:user_id/goals/:id', auth, GoalsController.update);
 routes.delete('/users/:user_id/goals/:id', auth, GoalsController.delete);
 
 // Tasks
-routes.get('/goals/:goal_id/tasks', auth, TaskController.index);
+routes.get('/goals/:goal_id/tasks', TaskController.index);
 routes.get('/goals/:goal_id/tasks/:id', auth, TaskController.getById);
 routes.post('/goals/:goal_id/tasks', auth, TaskController.create);
 routes.put('/goals/:goal_id/tasks/:id', auth, TaskController.update);
 routes.delete('/goals/:goal_id/tasks/:id', auth, TaskController.delete);
+routes.get('/goals/:goal_id/tasks/filter/late', TaskController.late);
 
 module.exports = routes;

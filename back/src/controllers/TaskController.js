@@ -1,5 +1,7 @@
 const Goal = require('../models/Goal');
 const Task = require('../models/Task');
+const { Op } = require('sequelize');
+const current = new Date();
 
 module.exports = {
     async index(req, res) {
@@ -82,5 +84,20 @@ module.exports = {
         catch {
             res.status(400).send({ erro: 'Falha ao deletar tarefa.' });
         }
-    }
+    },
+
+    // FILTERS
+
+    async late(req, res) {
+        const tasks = await Task.findAll({
+            where: { 
+                data_agendada: {
+                    [Op.lt]: current
+                } 
+            }
+        });
+        return res.status(200).json(tasks);
+    },
+
+    
 };
