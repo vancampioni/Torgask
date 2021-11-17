@@ -28,6 +28,7 @@ export const RightSide = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    font-family: arial;
 
     a {
         color: #FFF;
