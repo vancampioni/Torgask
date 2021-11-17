@@ -1,5 +1,6 @@
 const Goal = require('../models/Goal');
 const User = require('../models/User');
+const current = new Date();
 
 
 module.exports = {
@@ -74,5 +75,5 @@ module.exports = {
         catch {
             res.status(400).send({ erro: 'Falha ao deletar meta.' });
         }
-    }
+    },
 };

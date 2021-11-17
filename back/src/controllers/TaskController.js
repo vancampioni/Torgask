@@ -2,6 +2,17 @@ const Goal = require('../models/Goal');
 const Task = require('../models/Task');
 const { Op } = require('sequelize');
 const current = new Date();
+const { 
+    startOfDay,
+    endOfDay,
+    startOfWeek, 
+    endOfWeek,
+    startOfMonth,
+    endOfMonth,
+    startOfYear,
+    endOfYear,
+} = require('date-fns');
+
 
 module.exports = {
     async index(req, res) {
@@ -85,6 +96,7 @@ module.exports = {
             res.status(400).send({ erro: 'Falha ao deletar tarefa.' });
         }
     },
+    
 
     // FILTERS
 
@@ -92,12 +104,56 @@ module.exports = {
         const tasks = await Task.findAll({
             where: { 
                 data_agendada: {
-                    [Op.lt]: current
+                    [Op.lt]: current.setDate(current.getDate() - 1)
                 } 
             }
         });
         return res.status(200).json(tasks);
     },
 
-    
+    async today(req, res) {
+        const tasks = await Task.findAll({
+           where: {
+               data_agendada: {
+                   [Op.gte]: startOfDay(current), [Op.lte]: endOfDay(current) 
+               }
+           } 
+        });
+        return res.status(200).json(tasks);
+    },
+
+    async week(req, res) {
+        const tasks = await Task.findAll({
+           where: {
+               data_agendada: {
+                   [Op.gte]: startOfWeek(current), [Op.lte]: endOfWeek(current) 
+               }
+           } 
+        });
+        return res.status(200).json(tasks);
+    },
+
+    async month(req, res) {
+        const tasks = await Task.findAll({
+           where: {
+               data_agendada: {
+                   [Op.gte]: startOfMonth(current), [Op.lte]: endOfMonth(current) 
+               }
+           } 
+        });
+        return res.status(200).json(tasks);
+    },
+
+    async year(req, res) {
+        const tasks = await Task.findAll({
+           where: {
+               data_agendada: {
+                   [Op.gte]: startOfYear(current), [Op.lte]: endOfYear(current) 
+               }
+           } 
+        });
+        return res.status(200).json(tasks);
+    },
+
+
 };

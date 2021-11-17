@@ -40,9 +40,13 @@ routes.delete('/users/:user_id/goals/:id', auth, GoalsController.delete);
 // Tasks
 routes.get('/goals/:goal_id/tasks', TaskController.index);
 routes.get('/goals/:goal_id/tasks/:id', auth, TaskController.getById);
-routes.post('/goals/:goal_id/tasks', auth, TaskController.create);
+routes.post('/goals/:goal_id/tasks', TaskController.create);
 routes.put('/goals/:goal_id/tasks/:id', auth, TaskController.update);
 routes.delete('/goals/:goal_id/tasks/:id', auth, TaskController.delete);
 routes.get('/goals/:goal_id/tasks/filter/late', TaskController.late);
+routes.get('/goals/:goal_id/tasks/filter/today', TaskController.today);
+routes.get('/goals/:goal_id/tasks/filter/week', TaskController.week);
+routes.get('/goals/:goal_id/tasks/filter/month', TaskController.month);
+routes.get('/goals/:goal_id/tasks/filter/year', TaskController.year);
 
 module.exports = routes;
