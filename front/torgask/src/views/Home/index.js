@@ -5,6 +5,7 @@ import * as S from './styled';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
+import TaskCard from '../../components/TaskCard';
 
 function Home() {
   const [filterActived, setFilterActived] = useState('all');
@@ -30,6 +31,9 @@ function Home() {
           </button>
 
         </S.FilterArea>
+        <S.TaskCardArea>
+            <TaskCard />
+        </S.TaskCardArea>
         <Footer />
       </S.Container>
     );

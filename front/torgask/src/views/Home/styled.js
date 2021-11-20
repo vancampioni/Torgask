@@ -16,3 +16,6 @@ export const FilterArea = styled.div`
        border: none; 
     }
 `
+export const TaskCardArea = styled.div`
+    
+`
