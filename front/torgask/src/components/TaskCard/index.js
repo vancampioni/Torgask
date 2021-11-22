@@ -9,10 +9,10 @@ function TaskCard() {
               <S.Subject>
                   <span>assunto</span>
               </S.Subject>
-              <h1>descricao</h1>
+              <h3>descricao</h3>
           </S.TopArea>
           <S.BottomArea>
-              <span>data</span>
+              <strong>data</strong>
               <span>hora</span>
           </S.BottomArea>
       </S.Container>
