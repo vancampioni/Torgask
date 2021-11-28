@@ -38,7 +38,7 @@ export const Subject = styled.div`
     width: 200px;
     height: 40px;
     font-weight: bold;
-    background: #FDBB03;
+    background: #C409FB;
     align-items: center;
     justify-content: center;
     border-radius: 10px;

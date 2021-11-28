@@ -30,7 +30,7 @@ export const RightSide = styled.div`
     justify-content: flex-end;
     font-family: arial;
 
-    a {
+    a, button {
         color: #FFF;
         font-weight: bold;
         text-decoration: none;
@@ -39,6 +39,12 @@ export const RightSide = styled.div`
         &:hover {
             color: #484040;
         }
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     #notification {
@@ -56,6 +62,8 @@ export const RightSide = styled.div`
             top: -20px;
             right: 10px;
         }
+
+        
 
         &:hover {
             opacity: 0.6;

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styled';
+
+import api from '../../services/api';
 
 // COMPONENTES
 import Header from '../../components/Header';
@@ -8,11 +10,39 @@ import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
 function Home() {
+  //const [goalActived, setGoalActived] = useState();
   const [filterActived, setFilterActived] = useState('all');
+  const [tasks, setTasks] = useState([]);
+  const [lateCount, setLateCount] = useState();
+
+  async function loadTasks() {
+    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    .then(response => {
+      setTasks(response.data)
+    })
+  };
+
+  async function lateVerify() {
+    await api.get(`/goals/1/tasks/filter/late`)
+    .then(response => {
+      setLateCount(response.data.length)
+    })
+  };
+
+  function Notification() {
+    setFilterActived('late');
+  }
+
+  // Recarregar as atividades na tela quando o filtro mudar
+  useEffect(() => {
+    loadTasks();
+    lateVerify();
+  }, [filterActived])
+
     return (
       <S.Container>
 
-        <Header />
+        <Header lateCount={lateCount} clickNotification={Notification} />
         <S.FilterArea>
           <button type="button" onClick={() => setFilterActived("all")}>
             <Filter title="Todos" actived={filterActived == 'all'} onClick={() => setFilterActived("all")}/>
@@ -33,21 +63,16 @@ function Home() {
         </S.FilterArea>
 
         <S.Title>
-          <h3>TAREFAS</h3>
+          <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
         </S.Title>
 
         <S.TaskCardArea>
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
+          {
+            tasks.map(t => (
+
+              <TaskCard  nome={t.nome} assunto={t.goal_id} data_agendada={t.data_agendada} />
+            ))
+          }
         </S.TaskCardArea>
         <Footer />
       </S.Container>
