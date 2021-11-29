@@ -89,6 +89,11 @@ export const Options = styled.div`
         }
     }
 
+    #assunto {
+        border-radius: 5px;
+        border: none;
+    }
+
     #confirmar {
         background: #9EFA97
     }

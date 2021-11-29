@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './views/Home/index';
+
+import Rotas from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <Rotas />
   </React.StrictMode>,
   document.getElementById('root')
 );

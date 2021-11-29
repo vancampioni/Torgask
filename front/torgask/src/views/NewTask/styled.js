@@ -79,6 +79,7 @@ export const Options = styled.div`
 
     span {
         width: 100%;
+        margin-bottom: 50px;
         button {
             height: 30px;
             border: none;

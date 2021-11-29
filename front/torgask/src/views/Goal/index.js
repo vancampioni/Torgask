@@ -1,46 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styled';
+
+import api from '../../services/api';
 
 // COMPONENTES
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import GoalCard from '../../components/GoalCard';
 
-function Goal() {
-    const [filterActived, setFilterActived] = useState('all');
+function NewTask() {
+    const [lateCount, setLateCount] = useState();
+    const [id, setId] = useState();
+    const [estado, setEstado] = useState(false);
+    const [nome, setNome] = useState();
+    const [anotacao, setAnotacao] = useState();
+    const [data, setData] = useState();
+    const [hora, setHora] = useState();
+
+  async function lateVerify() {
+    await api.get(`/goals/1/tasks/filter/late`)
+    .then(response => {
+      setLateCount(response.data.length)
+    })
+  };
+
+  // Recarregar as atividades na tela quando o filtro mudar
+  useEffect(() => {
+    lateVerify();
+  }, [])
 
     return (
       <S.Container>
-          <Header />
-        <S.FilterArea>
-          <button type="button" onClick={() => setFilterActived("all")}>
-            <Filter title="Todos" actived={filterActived == 'all'} onClick={() => setFilterActived("all")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("today")}>
-            <Filter title="Hoje"actived={filterActived == 'today'} onClick={() => setFilterActived("today")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("week")}>
-            <Filter title="Semana" actived={filterActived == 'week'} onClick={() => setFilterActived("week")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("month")}>
-            <Filter title="Mês" actived={filterActived == 'month'} onClick={() => setFilterActived("month")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("year")}>
-            <Filter title="Ano" actived={filterActived == 'year'} onClick={() => setFilterActived("year")}/>
-          </button>
-
-        </S.FilterArea>
-
+        <Header lateCount={lateCount} />
+        
         <S.Title>
-          <h3>METAS</h3>
+          <h3> NOVA TAREFA </h3>
         </S.Title>
-          <GoalCard>
-              <h3>Aprender Programação</h3>
-          </GoalCard>
-          <Footer />    
+
+        <S.Form>
+            <S.Input>
+            <h4>Título</h4>
+            <input type="text" onChange={e => setNome(e.target.value)} value={nome}/>
+            <h4>Meta</h4>
+            <input type="text" />
+
+
+            </S.Input>
+            <S.TextArea>
+            <textarea rows={5} placeholder="Anotações: "/>
+
+            </S.TextArea>
+            <S.Date>
+            <span>Data:</span>
+            <input type="date"></input>
+            <span>Hora:</span>
+            <input type="time"></input>
+
+            </S.Date>
+            <S.Options>
+                <div>
+                
+                <p><input type="checkbox"/>Concluída</p>
+                </div>
+                
+                <span><button id="confirmar" type="button">CONFIRMAR</button></span>
+                
+                
+                <span><button id="cancelar" type="button">CANCELAR</button></span>
+                
+            </S.Options>
+
+            
+        </S.Form>
+
+        <Footer />
       </S.Container>
     );
   }
   
-  export default Goal;
+  export default NewTask;
   

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import * as S from './styled';
 
 import api from '../../services/api';
@@ -69,11 +70,13 @@ function Home() {
         <S.TaskCardArea>
           {
             tasks.map(t => (
-
+              <Link to={`/goals/1/tasks/${t.id}`}>
               <TaskCard  nome={t.nome} assunto={t.goal_id} data_agendada={t.data_agendada} />
+              </Link>
             ))
           }
         </S.TaskCardArea>
+        
         <Footer />
       </S.Container>
     );
