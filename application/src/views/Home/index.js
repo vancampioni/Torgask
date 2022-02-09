@@ -17,14 +17,14 @@ function Home() {
   const [lateCount, setLateCount] = useState();
 
   async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    await api.get(`/goals/:goal_id/tasks/filter/${filterActived}`)
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/1/tasks/filter/late`)
+    await api.get(`/goals/:goal_id/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })

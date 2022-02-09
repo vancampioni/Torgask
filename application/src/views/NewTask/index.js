@@ -8,7 +8,7 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function NewTask({match}) {
+function NewTask() {
     const [lateCount, setLateCount] = useState();
     const [id, setId] = useState();
     // const [goal_id, setGoalId] = useState();
@@ -25,20 +25,9 @@ function NewTask({match}) {
     })
   };
 
-  // async function LoadTaskDetails() {
-  //   await api.get(`/goals/1/tasks/${match.params.id}`)
-  //   .then(response => {
-  //     alert(setNome(response.data.nome))
-  //     setAnotacao(response.data.anotacao)
-  //     setEstado(response.data.estado)
-  //     setData(format(new Date(response.data.data_agendada), 'yyyy-MM-dd'))
-  //     setHora(format(new Date(response.data.data_agendada), 'HH:mm'))
-    
-  // })
-// }
-
+ 
   async function Save() {
-    await api.post('/goals/1/tasks', {
+    await api.post('/goals/:goal_id/tasks', {
       nome,
       anotacao,
       estado,
@@ -50,7 +39,6 @@ function NewTask({match}) {
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
     lateVerify();
-    // LoadTaskDetails();
   }, [])
 
     return (
