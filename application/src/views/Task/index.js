@@ -10,7 +10,7 @@ import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
-function Home() {
+function Task() {
   //const [goalActived, setGoalActived] = useState();
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
@@ -82,5 +82,5 @@ function Home() {
     );
   }
   
-  export default Home;
+  export default Task;
   

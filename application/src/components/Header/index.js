@@ -13,7 +13,7 @@ function Header({ lateCount, clickNotification }) {
         </S.LeftSide>
 
         <S.RightSide>
-          <Link to="/goals/1/tasks/filter/index">INÍCIO</Link>
+          <Link to="/users/:user_id/home">INÍCIO</Link>
           <span className="dividir"/>
           <Link to="/users/1/goals">METAS</Link>
           <span className="dividir"/>
