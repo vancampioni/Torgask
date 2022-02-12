@@ -16,15 +16,23 @@ function Task() {
   const [tasks, setTasks] = useState([]);
   const [lateCount, setLateCount] = useState();
 
-  async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+  async function loadTasks({goal_id}) {
+    await api.get(`/goals/:goal_id/tasks/filter/${filterActived}`, {
+      params: {
+        goal_id: this.goal_id
+      }
+    })
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
+    await api.get(`/goals/:goal_id/tasks/filter/late`, {
+      params: {
+        goal_id: this.goal_id
+      }
+    })
     .then(response => {
       setLateCount(response.data.length)
     })

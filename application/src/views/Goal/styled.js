@@ -26,9 +26,14 @@ export const Title = styled.div`
     }
 `
 
-export const Form = styled.div`
-    width: 50%;
-    margin-top: 50px;
+export const GoalCardArea = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+        text-decoration: none;
+    }
 `
 
 export const Input = styled.div`

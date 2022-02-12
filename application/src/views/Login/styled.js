@@ -21,3 +21,49 @@ export const Title = styled.div`
         background: #484040;
     }
 `
+
+export const Logo = styled.div`
+    width: 80%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-top: 110px;
+    padding-left: 600px;
+
+    img {
+        width: 270px;
+        height: auto;
+}
+`
+
+export const RightSide = styled.div`
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: arial;
+    color: #FFF;
+
+    button {
+        color: #484040;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 0 10px; 
+        padding: 8px;
+        border-radius: 10px;
+        background-color: #FFF
+
+        &:hover {
+            color: #FFF;
+        }
+    }
+
+    button {
+        cursor: pointer;
+    }
+`
+
+export const Login = styled.div `
+    
+`

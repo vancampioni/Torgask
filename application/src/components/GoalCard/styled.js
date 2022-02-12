@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 980px;
     height: 85px;
-    background: #484040;
+    background: #C409FB;
     box-shadow: 1px 1px 3px #FFF;
     cursor: pointer;
     color: #FFF;

@@ -2,10 +2,10 @@ import React from 'react';
 import * as S from './styled';
 
 
-function GoalCard() {
+function GoalCard({ nome }) {
     return (
       <S.Container>
-          <h1>Aprender Programação</h1>
+          <h1>{ nome }</h1>
       </S.Container>
     )
   }
