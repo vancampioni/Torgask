@@ -12,10 +12,10 @@ export const Container = styled.div`
 
 export const SocialMedias = styled.div`
     img {
-        width: 15px;;
+        width: 15px;
         height: auto;
         padding-top: 5px;
-        padding-right: 20px;
+        padding-right: 10px;
     }
 
     display: flex;
