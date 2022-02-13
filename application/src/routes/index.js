@@ -19,7 +19,7 @@ export default function Routes() {
                 <Route path="/goals/:goal_id/tasks" exact component={NewTask} />
                 <Route path="/users/:user_id/goal" exact component={NewGoal} />
                 <Route path="/goals/:goal_id/tasks/:id" exact component={NewTask} />
-                <Route path="/index" exact component={Login} />
+                <Route path="/" exact component={Login} />
                 <Route path="/users/:user_id/goals" exact component={Goal} />
                 
             </Switch>
