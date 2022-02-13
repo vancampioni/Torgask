@@ -73,6 +73,7 @@ export const Login = styled.div `
         margin: auto;
         display: flex;
         
+        
     }
 
     .form input {
@@ -85,6 +86,7 @@ export const Login = styled.div `
         padding: 15px;
         box-sizing: border-box;
         font-size: 14px;
+        border-radius: 10px;
       }
 
       .form button {
