@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
+import logo from '../../assets/logo-roxo.png';
+import smile from '../../assets/smile-wink.png';
 
 import api from '../../services/api';
 
@@ -11,72 +13,21 @@ import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
 function Home() {
-  //const [goalActived, setGoalActived] = useState();
-  const [filterActived, setFilterActived] = useState('all');
-  const [tasks, setTasks] = useState([]);
-  const [lateCount, setLateCount] = useState();
-
-  async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
-    .then(response => {
-      setTasks(response.data)
-    })
-  };
-
-  async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
-    .then(response => {
-      setLateCount(response.data.length)
-    })
-  };
-
-  function Notification() {
-    setFilterActived('late');
-  }
-
-  // Recarregar as atividades na tela quando o filtro mudar
-  useEffect(() => {
-    loadTasks();
-    lateVerify();
-  }, [filterActived])
 
     return (
       <S.Container>
-
-        <Header lateCount={lateCount} clickNotification={Notification} />
-        <S.FilterArea>
-          <button type="button" onClick={() => setFilterActived("all")}>
-            <Filter title="Todos" actived={filterActived == 'all'} onClick={() => setFilterActived("all")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("today")}>
-            <Filter title="Hoje"actived={filterActived == 'today'} onClick={() => setFilterActived("today")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("week")}>
-            <Filter title="Semana" actived={filterActived == 'week'} onClick={() => setFilterActived("week")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("month")}>
-            <Filter title="Mês" actived={filterActived == 'month'} onClick={() => setFilterActived("month")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("year")}>
-            <Filter title="Ano" actived={filterActived == 'year'} onClick={() => setFilterActived("year")}/>
-          </button>
-
-        </S.FilterArea>
-
-        <S.Title>
-          <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
-        </S.Title>
-
-        <S.TaskCardArea>
-          {
-            tasks.map(t => (
-              <Link to={`/goals/${t.goal_id}/tasks/${t.id}`}>
-              <TaskCard  nome={t.nome} assunto={t.goal_id} data_agendada={t.data_agendada} />
-              </Link>
-            ))
-          }
-        </S.TaskCardArea>
-        
+        <Header/>
+          <S.Text>
+            <h1>Seja bem-vindx ao </h1>
+            
+              <img id='logo' src={logo} alt="Logo" />
+           
+            <h1>!</h1>
+            <h3>seu gerenciador de tarefas </h3>
+            <img id='smile-wink' src={smile} alt="Carinha feliz!" />
+            <p>Para começar, clique no botão abaixo e assista ao nosso tutorial de primeiros passos:</p>
+            <button type='button'>PRIMEIROS PASSOS</button>
+          </S.Text>
         <Footer />
       </S.Container>
     );

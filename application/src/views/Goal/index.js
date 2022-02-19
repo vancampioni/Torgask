@@ -48,13 +48,7 @@ function Goal() {
         </S.Title>
 
         <S.GoalCardArea>
-        {
-            goals.map(g => (
-              <Link to={`${g.user_id}/goals/${g.id}`}>
-              <GoalCard  nome={g.nome} />
-              </Link>
-            ))
-          }
+          <GoalCard />
 
         </S.GoalCardArea>
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 980px;
-    height: 85px;
+    height: 60px;
     background: #C409FB;
     box-shadow: 1px 1px 3px #FFF;
     cursor: pointer;
@@ -23,6 +23,10 @@ export const Container = styled.div`
 
     &:hover {
         opacity: 0.5;
+    }
+
+    h1 {
+        color: #FFF;
     }
     
 `

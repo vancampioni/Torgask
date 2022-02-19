@@ -10,29 +10,21 @@ import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
-function Task() {
+function Tasks() {
   //const [goalActived, setGoalActived] = useState();
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
   const [lateCount, setLateCount] = useState();
 
-  async function loadTasks({goal_id}) {
-    await api.get(`/goals/:goal_id/tasks/filter/${filterActived}`, {
-      params: {
-        goal_id: this.goal_id
-      }
-    })
+  async function loadTasks() {
+    await api.get(`/goals/1/tasks/filter/${filterActived}`)
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`, {
-      params: {
-        goal_id: this.goal_id
-      }
-    })
+    await api.get(`/goals/:goal_id/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })
@@ -90,5 +82,5 @@ function Task() {
     );
   }
   
-  export default Task;
+  export default Tasks;
   

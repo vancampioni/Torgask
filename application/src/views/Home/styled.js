@@ -4,42 +4,38 @@ export const Container = styled.div`
     width: 100%;
 `;
 
-export const FilterArea = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 60px;
+export const Text = styled.div`
+    font-family: Arial;
+    text-align: center;
+    color: #FFF;
+    margin-top: 20px;
 
-    button {
-       background: none;
-       border: none; 
+    h1 {
+        display: inline;
+        font-size: 50px;
     }
-`
-export const TaskCardArea = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-    a {
-        text-decoration: none;
-    }
-`
 
-export const Title = styled.div`
-    width: 100%;
-    border-bottom: 1px solid #707070;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-    
     h3 {
-        color: #FFF;
-        font-family: arial;
-        font-weight: bold;
-        position: relative;
-        top: 30px;
-        background: #484040;
+        margin-top: 50px;
+    }
+
+    #logo {
+        width: 200px;
+        padding-top: 20px;
+        margin-bottom: -13px;
+        margin-left: -10px;
+        
+    }
+
+    #smile-wink {
+        width: 40px;
+        heigth: auto;
+        padding-left: 300px;
+        margin-top: -400px;
+    }
+
+    div {
+        display: inline;
+        margin-top: 20px;
     }
 `
