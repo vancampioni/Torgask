@@ -16,7 +16,8 @@ export const Text = styled.div`
     }
 
     h3 {
-        margin-top: 50px;
+        display: inline;
+        width: 500px;
     }
 
     #logo {
@@ -28,14 +29,34 @@ export const Text = styled.div`
     }
 
     #smile-wink {
-        width: 40px;
+        width: 30px;
         heigth: auto;
-        padding-left: 300px;
-        margin-top: -400px;
+        margin-top: 50px;
+        margin-left: 10px;
+    }
+
+    p {
+        margin-top: 100px;
+        font-weight: bold;
+    }
+
+    button {
+        color: #484040;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 20px 140px; 
+        padding: 8px;
+        border-radius: 10px;
+        background-color: #FFF
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+            color: #FFF;
+        }
     }
 
     div {
-        display: inline;
-        margin-top: 20px;
+
     }
 `

@@ -23,8 +23,13 @@ function Home() {
               <img id='logo' src={logo} alt="Logo" />
            
             <h1>!</h1>
-            <h3>seu gerenciador de tarefas </h3>
-            <img id='smile-wink' src={smile} alt="Carinha feliz!" />
+            <div>
+            <h3>
+              seu gerenciador de tarefas 
+              <img id='smile-wink' src={smile} alt="Carinha feliz!" />
+            </h3>
+            
+            </div>
             <p>Para começar, clique no botão abaixo e assista ao nosso tutorial de primeiros passos:</p>
             <button type='button'>PRIMEIROS PASSOS</button>
           </S.Text>
