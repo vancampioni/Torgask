@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
-import plus from '../../assets/plus-square.png';
 
 import api from '../../services/api';
 
 // COMPONENTES
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
-function Tasks() {
+function LateTasks() {
   //const [goalActived, setGoalActived] = useState();
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
@@ -45,35 +43,10 @@ function Tasks() {
       <S.Container>
 
         <Header lateCount={lateCount} clickNotification={Notification} />
-        <S.FilterArea>
-          <button type="button" onClick={() => setFilterActived("all")}>
-            <Filter title="Todos" actived={filterActived == 'all'} onClick={() => setFilterActived("all")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("today")}>
-            <Filter title="Hoje"actived={filterActived == 'today'} onClick={() => setFilterActived("today")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("week")}>
-            <Filter title="Semana" actived={filterActived == 'week'} onClick={() => setFilterActived("week")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("month")}>
-            <Filter title="Mês" actived={filterActived == 'month'} onClick={() => setFilterActived("month")}/>
-          </button>
-          <button type="button" onClick={() => setFilterActived("year")}>
-            <Filter title="Ano" actived={filterActived == 'year'} onClick={() => setFilterActived("year")}/>
-          </button>
-
-        </S.FilterArea>
 
         <S.Title>
-          <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
-        </S.Title>
-
-        <Link to="/goals/:goal_id/tasks/:id">
-          <div class="new-task">
-            <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
-          </div>
-        </Link>
-        
+          <h3>TAREFAS ATRASADAS</h3>
+        </S.Title>        
 
         <S.TaskCardArea>
           {
@@ -90,5 +63,5 @@ function Tasks() {
     );
   }
   
-  export default Tasks;
+  export default LateTasks;
   

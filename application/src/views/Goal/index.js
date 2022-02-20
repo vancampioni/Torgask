@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styled';
 import { Link } from 'react-router-dom';
+import plus from '../../assets/plus-square.png';
 
 import api from '../../services/api';
 
@@ -44,8 +45,14 @@ function Goal() {
         <Header lateCount={lateCount} clickNotification={Notification} />
 
         <S.Title>
-          <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'METAS'}</h3>
+          <h3>METAS</h3>
         </S.Title>
+
+        <Link to="/users/:user_id/goal">
+          
+            <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
+         
+        </Link>
 
         <S.GoalCardArea>
           <GoalCard />

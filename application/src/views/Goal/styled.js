@@ -6,6 +6,13 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     font-family: arial;
+
+    #cadastrar-tarefa {
+        width: 30px;
+        margin-left: 1310px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
 `;
 
 export const Title = styled.div`

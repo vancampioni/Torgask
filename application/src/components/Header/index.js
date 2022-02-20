@@ -17,12 +17,14 @@ function Header({ lateCount, clickNotification }) {
           <span className="dividir"/>
           <Link to="/users/1/goals">METAS</Link>
           <span className="dividir"/>
-          <Link to="/goals/1/tasks">NOVA TAREFA</Link>
+          <Link to="/goals/:goal_id/tasks/filter/index">TAREFAS</Link>
           <span className="dividir"/>
-          <button onClick={clickNotification} id="notification">
-            <img src={bell} alt="Notificacao" />
-            <span>{lateCount}</span>
-          </button>
+          <Link to="/goals/:goal_id/tasks/filter/late">
+            <button id="notification">
+              <img src={bell} alt="Notificacao" />
+              <span>{lateCount}</span>
+            </button>
+          </Link>
         </S.RightSide>
 
       </S.Container>
