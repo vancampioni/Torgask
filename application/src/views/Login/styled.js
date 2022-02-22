@@ -23,12 +23,10 @@ export const Title = styled.div`
 `
 
 export const Logo = styled.div`
-    width: 80%;
-    height: 70px;
+    width: 100%;
     display: flex;
     align-items: center;
-    padding-top: 110px;
-    padding-left: 550px;
+    justify-content: center;
 
     img {
         width: 270px;
@@ -66,6 +64,9 @@ export const RightSide = styled.div`
 `
 
 export const Login = styled.div `
+
+    width: 100%;
+    margin-top: 100px;
 
     .login-page {
         width: 360px;

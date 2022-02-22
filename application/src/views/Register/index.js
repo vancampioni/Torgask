@@ -13,10 +13,11 @@ function Register() {
   return (
     <S.Container>
 
+      
+      <S.Form>
       <S.Logo>
         <img src={logo} alt="Logo" />
       </S.Logo>
-      <S.Form>
             <div class="login-page">
             <div class="form">
                 <form class="login-form">

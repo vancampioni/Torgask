@@ -23,12 +23,11 @@ export const Title = styled.div`
 `
 
 export const Logo = styled.div`
-    width: 80%;
+    width: 100%;
     height: 70px;
     display: flex;
     align-items: center;
-    padding-top: 90px;
-    padding-left: 550px;
+    justify-content: center;
 
     img {
         width: 270px;
@@ -39,14 +38,14 @@ export const Logo = styled.div`
 
 
 export const Form = styled.div `
+    width: 100%;
+    margin-top: 100px;
 
     .login-page {
         width: 360px;
         padding: 3% 0 0;
         margin: auto;
         display: flex;
-        
-        
     }
 
     .form input {

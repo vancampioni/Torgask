@@ -20,10 +20,11 @@ function Login() {
           <button type='button'>CADASTRE-SE</button>
         </Link>
       </S.RightSide>
+      
+      <S.Login>
       <S.Logo>
         <img src={logo} alt="Logo" />
       </S.Logo>
-      <S.Login>
         <div class="login-page">
           <div class="form">
             <form class="login-form">
