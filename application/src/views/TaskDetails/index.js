@@ -15,55 +15,58 @@ function TaskDetails() {
 
   async function lateVerify() {
     await api.get(`/goals/:goal_id/tasks/filter/late`)
-    .then(response => {
-      setLateCount(response.data.length)
-    })
+      .then(response => {
+        setLateCount(response.data.length)
+      })
   };
 
   function Notification() {
     setFilterActived('late');
   }
 
-    return (
-      <S.Container>
+  return (
 
-        <Header lateCount={lateCount} clickNotification={Notification} />
-        
+    <S.Container>
 
-        <S.Title>
-          <h3>DETALHES DA TAREFA</h3>
-        </S.Title>
+      <Header lateCount={lateCount} clickNotification={Notification} />
 
-        <S.DetailsArea>
-          <S.DetailsBox>
-            <div className='nome-tarefa'>
-              <h3>Nome</h3>
+
+      <S.Title>
+        <h3>DETALHES DA TAREFA</h3>
+      </S.Title>
+
+      <S.DetailsArea>
+        <S.DetailsBox>
+          <div className='nome-tarefa'>
+            <h3>Nome</h3>
+          </div>
+          <div className='anotacao-tarefa'>
+            <div className='texto-anotacao'>Texto</div>
+          </div>
+          <div className='assunto-tarefa'>
+            <h4>Assunto:</h4>
+            <button type='button'>C#</button>
+          </div>
+          <div className='data-tarefa'> 
+            <div>Data: </div> <div className='box'><input /></div>
+            <div>Hora: </div> <div className='box'><input /></div>
+          </div>
+          <div className='concluida'>
+            <div>Concluída
+              <input type='checkbox' />
             </div>
-            <div className='anotacao-tarefa'> 
-              <div className='texto-anotacao'>Texto</div>
+            <div className='buttons'>
+              <button className='action-button' type='button' >EDITAR</button>
+              <button id='excluir-button' className='action-button' type='button' >EXCLUIR</button>
             </div>
-            <div className='assunto-tarefa'>
-              <h4>Assunto:</h4>
-              <button type='button'>C#</button>
-            </div>
-            <div className='data-tarefa'>
-              <h4>Data: </h4>
-              <div className='data'>
+          </div>
+        </S.DetailsBox>
+      </S.DetailsArea >
 
-              </div>
-              <h4>Hora: </h4>
-              <div className='hora'>
-                  
-              </div>
-            </div>
-          </S.DetailsBox>
-        </S.DetailsArea>
-        
 
-        <Footer />
-      </S.Container>
-    );
-  }
-  
-  export default TaskDetails;
-  
+      <Footer />
+    </S.Container >
+  );
+}
+
+export default TaskDetails;
