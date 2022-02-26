@@ -14,21 +14,36 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function TaskDetails() {
+function GoalDetails() {
     const [lateCount, setLateCount] = useState();
-    const [filterActived, setFilterActived] = useState('late');
-    const [value, setValue] = React.useState([null, null]);
+    const [data, setData] = useState();
+    const [hora, setHora] = useState();
+    const [filterActived, setFilterActived] = useState('all');
+    const [tasks, setTasks] = useState([]);
 
-    async function lateVerify() {
+    async function loadTasks() {
+        await api.get(`/goals/1/tasks/filter/${filterActived}`)
+        .then(response => {
+          setTasks(response.data)
+        })
+      };
+    
+      async function lateVerify() {
         await api.get(`/goals/:goal_id/tasks/filter/late`)
-            .then(response => {
-                setLateCount(response.data.length)
-            })
-    };
-
-    function Notification() {
+        .then(response => {
+          setLateCount(response.data.length)
+        })
+      };
+    
+      function Notification() {
         setFilterActived('late');
-    }
+      }
+    
+      // Recarregar as atividades na tela quando o filtro mudar
+      useEffect(() => {
+        loadTasks();
+        lateVerify();
+      }, [filterActived])
 
     return (
 
@@ -58,25 +73,13 @@ function TaskDetails() {
                           <span> Nova Tarefa</span>
                         </div>
                     </div>
-                    <div className='data-meta'>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DateRangePicker
-                                startText="Check-in"
-                                endText="Check-out"
-                                value={value}
-                                onChange={(newValue) => {
-                                    setValue(newValue);
-                                }}
-                                renderInput={(startProps, endProps) => (
-                                    <React.Fragment>
-                                        <TextField {...startProps} />
-                                        <Box sx={{ mx: 2 }}> to </Box>
-                                        <TextField {...endProps} />
-                                    </React.Fragment>
-                                )}
-                            />
-                        </LocalizationProvider>
-                    </div>
+                    <S.Date>
+            <span>Data:</span>
+            <input type="date" onChange={e => setData(e.target.value)} value={data}/>
+            <span>Hora:</span>
+            <input type="time" onChange={e => setHora(e.target.value)} value={hora}></input>
+
+            </S.Date>
                     <div className='concluida'>
                         <div>Concluída
                             <input type='checkbox' />
@@ -96,4 +99,4 @@ function TaskDetails() {
     );
 }
 
-export default TaskDetails;
+export default GoalDetails;

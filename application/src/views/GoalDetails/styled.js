@@ -146,3 +146,39 @@ export const DetailsBox = styled.div`
         
     }
 `
+
+export const Input = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: arial;
+    color: #FFF;
+    margin-bottom: 40px
+
+    span {
+        
+    }
+
+    input {
+        background: none;
+        border: none;
+        border: 1px solid #707070;
+        padding: 10px;
+        color: #FFF;
+    }
+    
+`
+
+export const Date = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: line;
+    margin-top: 0px;
+    margin-left: 42px;
+    color: #707070;
+    margin-bottom: 15px;
+
+    span {
+        margin: 5px;
+    }
+`

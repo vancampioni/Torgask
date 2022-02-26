@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import * as S from './styled';
-import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@date-io/date-fns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DateTimePicker from '@mui/lab/DateTimePicker';
 
 
 import api from '../../services/api';
@@ -15,19 +10,34 @@ import Footer from '../../components/Footer';
 
 function TaskDetails() {
   const [lateCount, setLateCount] = useState();
-  const [filterActived, setFilterActived] = useState('late');
-  const [value, setValue] = React.useState(new Date());
+    const [data, setData] = useState();
+    const [hora, setHora] = useState();
+    const [filterActived, setFilterActived] = useState('all');
+    const [tasks, setTasks] = useState([]);
 
-  async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
-      .then(response => {
-        setLateCount(response.data.length)
-      })
-  };
-
-  function Notification() {
-    setFilterActived('late');
-  }
+    async function loadTasks() {
+        await api.get(`/goals/1/tasks/filter/${filterActived}`)
+        .then(response => {
+          setTasks(response.data)
+        })
+      };
+    
+      async function lateVerify() {
+        await api.get(`/goals/:goal_id/tasks/filter/late`)
+        .then(response => {
+          setLateCount(response.data.length)
+        })
+      };
+    
+      function Notification() {
+        setFilterActived('late');
+      }
+    
+      // Recarregar as atividades na tela quando o filtro mudar
+      useEffect(() => {
+        loadTasks();
+        lateVerify();
+      }, [filterActived])
 
   return (
 
@@ -53,16 +63,13 @@ function TaskDetails() {
             <button type='button'>C#</button>
           </div>
           <div className='data-tarefa'>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateTimePicker
-                renderInput={(props) => <TextField {...props} />}
-                label="DateTimePicker"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </LocalizationProvider>
+          <S.Date>
+            <span>Data:</span>
+            <input type="date" onChange={e => setData(e.target.value)} value={data}/>
+            <span>Hora:</span>
+            <input type="time" onChange={e => setHora(e.target.value)} value={hora}></input>
+
+            </S.Date>
           </div>
           <div className='concluida'>
             <div>Concluída
