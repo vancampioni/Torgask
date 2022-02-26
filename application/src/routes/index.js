@@ -10,7 +10,7 @@ import Goal from '../views/Goal';
 import Register from '../views/Register';
 import LateTasks from '../views/LateTasks';
 import TaskDetails from '../views/TaskDetails';
-
+import GoalDetails from '../views/GoalDetails';
 
 
 export default function Routes() {
@@ -25,6 +25,7 @@ export default function Routes() {
                 <Route path="/goals/:goal_id/tasks" exact component={NewTask} />
                 <Route path="/goals/:goal_id/tasks/:id" exact component={TaskDetails} />
                 <Route path="/users/:user_id/goals" exact component={Goal} />
+                <Route path="/users/:user_id/goals/:id" exact component={GoalDetails} />
                 <Route path="/goals/:goal_id/tasks/filter/late" exact component={LateTasks} />
                 
             </Switch>

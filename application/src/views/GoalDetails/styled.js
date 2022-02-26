@@ -69,7 +69,13 @@ export const DetailsBox = styled.div`
         flex-direction: left;
         align-items: center;
         margin-left: 50px;
+        margin-top: -25px;
         color: #707070;
+
+        img {
+            width: 20px;
+            margin-top: 5px;
+        }
 
         button {
             width: 50px;
@@ -82,25 +88,61 @@ export const DetailsBox = styled.div`
             font-weight: bold;
             margin-left: 10px;
         }
+
+        .nova-tarefa {
+            display-flex;
+            width: 70%;
+            height: 27px;
+            align-items: center;
+            justify-content: center;
+            height: 27px;
+
+        }
     }
 
     .data-meta {
         display: flex;
-        width: 80%;
+        width: 45%;
         flex-direction: left;
-        align-items: center;
-        justify-content: space-around;
+        align-items: left;
         color: #707070;
-        margin-left: 35px;
+        margin-left: 48px;
         margin-top: -5px;
     }
 
     .concluida {
         display: flex;
+        width: 100%;
         flex-direction: left;
         align-items: center;
         margin-left: 47px;
-        margin-top: 10px;
         color: #707070;
+
+        .buttons {
+            display: flex;
+            width: 75%;
+            justify-content: right;
+        }
+
+        button {
+            align-items: right;
+            height: 27px;
+            color: #707070;
+            border-radius: 5px;
+            border: 1px solid #707070;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+
+            &:hover {
+                opacity: 50%;
+            }
+        }
+
+        #excluir-button {
+            background: pink;
+        }
+
+        
     }
 `

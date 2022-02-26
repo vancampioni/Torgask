@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
-import plus from '../../assets/plus-square.png';
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@date-io/date-fns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+
 
 import api from '../../services/api';
 
@@ -12,6 +16,7 @@ import Footer from '../../components/Footer';
 function TaskDetails() {
   const [lateCount, setLateCount] = useState();
   const [filterActived, setFilterActived] = useState('late');
+  const [value, setValue] = React.useState(new Date());
 
   async function lateVerify() {
     await api.get(`/goals/:goal_id/tasks/filter/late`)
@@ -47,9 +52,17 @@ function TaskDetails() {
             <h4>Assunto:</h4>
             <button type='button'>C#</button>
           </div>
-          <div className='data-tarefa'> 
-            <div>Data: </div> <div className='box'><input /></div>
-            <div>Hora: </div> <div className='box'><input /></div>
+          <div className='data-tarefa'>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DateTimePicker
+                renderInput={(props) => <TextField {...props} />}
+                label="DateTimePicker"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+              />
+            </LocalizationProvider>
           </div>
           <div className='concluida'>
             <div>Concluída

@@ -69,6 +69,7 @@ export const DetailsBox = styled.div`
         flex-direction: left;
         align-items: center;
         margin-left: 50px;
+        margin-top: -25px;
         color: #707070;
 
         button {
@@ -86,12 +87,11 @@ export const DetailsBox = styled.div`
 
     .data-tarefa {
         display: flex;
-        width: 80%;
+        width: 45%;
         flex-direction: left;
-        align-items: center;
-        justify-content: space-around;
+        align-items: left;
         color: #707070;
-        margin-left: 35px;
+        margin-left: 48px;
         margin-top: -5px;
     }
 
@@ -100,7 +100,6 @@ export const DetailsBox = styled.div`
         flex-direction: left;
         align-items: center;
         margin-left: 47px;
-        margin-top: 10px;
         color: #707070;
 
         .buttons {
