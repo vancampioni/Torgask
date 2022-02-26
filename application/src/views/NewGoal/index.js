@@ -17,21 +17,36 @@ function NewTask() {
     const [data_fim, setDataFim] = useState();
     const [assunto, setAssunto] = useState();
 
-  async function lateVerify() {
-    await api.get(`/goals/1/tasks/filter/late`)
-    .then(response => {
-      setLateCount(response.data.length)
-    })
-  };
-
-  // Recarregar as atividades na tela quando o filtro mudar
-  useEffect(() => {
-    lateVerify();
-  }, [])
+    const [filterActived, setFilterActived] = useState('all');
+    const [tasks, setTasks] = useState([]);
+  
+    async function loadTasks() {
+      await api.get(`/goals/1/tasks/filter/${filterActived}`)
+      .then(response => {
+        setTasks(response.data)
+      })
+    };
+  
+    async function lateVerify() {
+      await api.get(`/goals/:goal_id/tasks/filter/late`)
+      .then(response => {
+        setLateCount(response.data.length)
+      })
+    };
+  
+    function Notification() {
+      setFilterActived('late');
+    }
+  
+    // Recarregar as atividades na tela quando o filtro mudar
+    useEffect(() => {
+      loadTasks();
+      lateVerify();
+    }, [filterActived])
 
     return (
       <S.Container>
-        <Header lateCount={lateCount} />
+        <Header lateCount={lateCount} clickNotification={Notification} />
         
         <S.Title>
           <h3> NOVA META </h3>

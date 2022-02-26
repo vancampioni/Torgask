@@ -68,7 +68,7 @@ function Tasks() {
           <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
         </S.Title>
 
-        <Link to="/goals/:goal_id/tasks/:id">
+        <Link to="/goals/:goal_id/tasks">
           <div class="new-task">
             <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
           </div>

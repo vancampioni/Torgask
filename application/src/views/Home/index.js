@@ -13,10 +13,37 @@ import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
 function Home() {
+  const [filterActived, setFilterActived] = useState('all');
+  const [tasks, setTasks] = useState([]);
+  const [lateCount, setLateCount] = useState();
 
+  async function loadTasks() {
+    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    .then(response => {
+      setTasks(response.data)
+    })
+  };
+
+  async function lateVerify() {
+    await api.get(`/goals/:goal_id/tasks/filter/late`)
+    .then(response => {
+      setLateCount(response.data.length)
+    })
+  };
+
+  function Notification() {
+    setFilterActived('late');
+  }
+
+  // Recarregar as atividades na tela quando o filtro mudar
+  useEffect(() => {
+    loadTasks();
+    lateVerify();
+  }, [filterActived])
+  
     return (
       <S.Container>
-        <Header/>
+        <Header lateCount={lateCount} clickNotification={Notification} />
           <S.Text>
             <h1>Seja bem-vindx ao </h1>
             
