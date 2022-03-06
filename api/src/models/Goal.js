@@ -6,7 +6,6 @@ class Goal extends Model {
             nome: DataTypes.STRING,
             descricao: DataTypes.STRING,
             estado: DataTypes.BOOLEAN,
-            assunto: DataTypes.STRING,
             data_inicio: DataTypes.DATE,
             data_fim: DataTypes.DATE,
         }, {

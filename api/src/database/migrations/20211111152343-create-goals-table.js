@@ -28,10 +28,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
-      assunto: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       data_inicio: {
         type: Sequelize.DATE,
         allowNull: false

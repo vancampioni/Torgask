@@ -5,8 +5,10 @@ class Task extends Model {
         super.init({
             nome: DataTypes.STRING,
             anotacao: DataTypes.STRING,
+            assunto: DataTypes.STRING,
             estado: DataTypes.BOOLEAN,
             data_agendada: DataTypes.DATE,
+            goal_id: DataTypes.INTEGER
         }, {
             sequelize
         })

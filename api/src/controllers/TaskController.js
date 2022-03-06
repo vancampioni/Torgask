@@ -17,22 +17,21 @@ const {
 module.exports = {
     
 
-    async getById(req, res) {
+    async getByGoal(req, res) {
         const { goal_id } = req.params;
 
         const goal = await Goal.findByPk(goal_id, {
             include: { association: 'tasks' }
         });
 
-        const task = await Task.findByPk(req.params.id);
-        console.log(task)
+        const task = await Task.findAll();
         return res.json(task);
     },
 
     async create(req, res) {
         const { goal_id } = req.params;
 
-        const { nome, anotacao, estado, data_agendada } = req.body;
+        const { nome, anotacao, assunto, estado, data_agendada } = req.body;
 
         const goal = await Goal.findByPk(goal_id);
         if (!goal) {
@@ -42,6 +41,7 @@ module.exports = {
         const task = await Task.create({ 
             nome, 
             anotacao, 
+            assunto,
             estado, 
             data_agendada, 
             goal_id,  
@@ -54,7 +54,7 @@ module.exports = {
         try {
             const { goal_id } = req.params;
 
-            const { nome, anotacao, estado, data_agendada } = req.body;
+            const { nome, anotacao, assunto, estado, data_agendada } = req.body;
 
             const goal = await Goal.findByPk(goal_id);
             if (!goal) {
@@ -62,7 +62,7 @@ module.exports = {
             }
 
             await Task.update(
-                { nome, anotacao, estado, data_agendada },
+                { nome, anotacao, assunto, estado, data_agendada },
                 {
                     where: { goal_id: req.params.goal_id },
                     where: { id: req.params.id }
@@ -94,23 +94,19 @@ module.exports = {
     // FILTERS
 
     async index(req, res) {
-        const { goal_id } = req.params;
-
-        const goal = await Goal.findByPk(goal_id, {
-            include: { association: 'tasks' }
-        });
-
-        return res.json(goal);
+        const tasks = await Task.findAll();
+        return res.status(200).json(tasks);
     },
 
     async late(req, res) {
         const tasks = await Task.findAll({
             where: { 
                 data_agendada: {
-                    [Op.lt]: current.setDate(current.getDate() - 1)
+                    [Op.lt]: current.setDate(current.getUTCDate())
                 } 
             }
         });
+        console.log(current)
         return res.status(200).json(tasks);
     },
 
@@ -118,7 +114,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfDay(current), [Op.lte]: endOfDay(current) 
+                   [Op.gte]: startOfDay(current.getUTCDate()), [Op.lte]: endOfDay(current.getUTCDate()) 
                }
            } 
         });
@@ -129,7 +125,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfWeek(current), [Op.lte]: endOfWeek(current) 
+                   [Op.gte]: startOfWeek(current.getUTCDate()), [Op.lte]: endOfWeek(current.getUTCDate()) 
                }
            } 
         });
@@ -140,7 +136,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfMonth(current), [Op.lte]: endOfMonth(current) 
+                   [Op.gte]: startOfMonth(current.getUTCDate()), [Op.lte]: endOfMonth(current.getUTCDate()) 
                }
            } 
         });
@@ -151,12 +147,10 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfYear(current), [Op.lte]: endOfYear(current) 
+                   [Op.gte]: startOfYear(current.getUTCDate()), [Op.lte]: endOfYear(current.getUTCDate()) 
                }
            } 
         });
         return res.status(200).json(tasks);
     },
-
-
 };
