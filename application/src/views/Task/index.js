@@ -12,20 +12,20 @@ import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
 function Tasks() {
-  //const [goalActived, setGoalActived] = useState();
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
   const [lateCount, setLateCount] = useState();
+  
 
   async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    await api.get(`/tasks/filter/${filterActived}`)
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
+    await api.get(`/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })
@@ -68,21 +68,23 @@ function Tasks() {
           <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
         </S.Title>
 
-        <Link to="/goals/:goal_id/tasks">
-          <div class="new-task">
+        <Link to="/task">
+          <div className="new-task">
             <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
           </div>
         </Link>
         
 
         <S.TaskCardArea>
-          {
-            tasks.map(t => (
-              <Link to={`/goals/${t.goal_id}/tasks/${t.id}`}>
-              <TaskCard  nome={t.nome} assunto={t.goal_id} data_agendada={t.data_agendada} />
-              </Link>
-            ))
-          }
+        {
+          tasks.map(t => (
+          <Link to={`/tasks/${t._id}`}>
+            <TaskCard 
+              />    
+          </Link>
+          ))  
+        }
+           
         </S.TaskCardArea>
         
         <Footer />

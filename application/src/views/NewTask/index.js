@@ -19,7 +19,7 @@ function NewTask() {
     const [hora, setHora] = useState();
 
   async function lateVerify() {
-    await api.get(`/goals/1/tasks/filter/late`)
+    await api.get(`/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })
@@ -27,7 +27,7 @@ function NewTask() {
 
  
   async function Save() {
-    await api.post('/goals/:goal_id/tasks', {
+    await api.post('/tasks', {
       nome,
       anotacao,
       estado,

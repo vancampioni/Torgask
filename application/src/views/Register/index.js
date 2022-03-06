@@ -18,9 +18,9 @@ function Register() {
       <S.Logo>
         <img src={logo} alt="Logo" />
       </S.Logo>
-            <div class="login-page">
-            <div class="form">
-                <form class="login-form">
+            <div className="login-page">
+            <div className="form">
+                <form className="login-form">
                     <input type="text" placeholder="Nome" />
                     <input type="email" placeholder="E-mail" />
                     <input type="password" placeholder="Senha" />

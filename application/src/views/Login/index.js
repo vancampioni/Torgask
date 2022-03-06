@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import logo from '../../assets/logo-roxo.png';
-import Routes from '../../routes';
+import { Context } from '../../services/context';
 
 import api from '../../services/api';
 
@@ -10,6 +10,10 @@ import api from '../../services/api';
 import Footer from '../../components/Footer';
 
 function Login() {
+  const { authenticated, handleLogin } = useContext(Context);
+  console.debug('Login', authenticated);
+  
+
 
   return (
     <S.Container>
@@ -25,12 +29,12 @@ function Login() {
       <S.Logo>
         <img src={logo} alt="Logo" />
       </S.Logo>
-        <div class="login-page">
-          <div class="form">
-            <form class="login-form">
+        <div className="login-page">
+          <div className="form">
+            <form className="login-form">
               <input type="text" placeholder="E-mail" />
               <input type="password" placeholder="Senha" />
-              <button>ENTRAR</button>
+              <button type='button' onClick={handleLogin}>ENTRAR</button>
             </form>
           </div>
         </div>

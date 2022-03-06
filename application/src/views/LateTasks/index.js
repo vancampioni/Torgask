@@ -16,14 +16,14 @@ function LateTasks() {
   const [lateCount, setLateCount] = useState();
 
   async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    await api.get(`/tasks/filter/${filterActived}`)
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
+    await api.get(`/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })
@@ -51,9 +51,7 @@ function LateTasks() {
         <S.TaskCardArea>
           {
             tasks.map(t => (
-              <Link to={`/goals/${t.goal_id}/tasks/${t.id}`}>
-              <TaskCard  nome={t.nome} assunto={t.goal_id} data_agendada={t.data_agendada} />
-              </Link>
+                <TaskCard  />
             ))
           }
         </S.TaskCardArea>

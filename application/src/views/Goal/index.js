@@ -17,14 +17,14 @@ function Goal() {
   const [lateCount, setLateCount] = useState();
 
   async function loadTasks() {
-    await api.get(`/goals/1/tasks/filter/${filterActived}`)
+    await api.get(`/tasks/filter/${filterActived}`)
     .then(response => {
       setTasks(response.data)
     })
   };
 
   async function lateVerify() {
-    await api.get(`/goals/:goal_id/tasks/filter/late`)
+    await api.get(`/tasks/filter/late`)
     .then(response => {
       setLateCount(response.data.length)
     })
@@ -49,14 +49,16 @@ function Goal() {
           <h3>METAS</h3>
         </S.Title>
 
-        <Link to="/users/:user_id/goal">
+        <Link to="/goal">
           
             <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
          
         </Link>
 
         <S.GoalCardArea>
-          <GoalCard />
+          <Link to="/goals/:id">
+            <GoalCard />
+          </Link>
 
         </S.GoalCardArea>
 

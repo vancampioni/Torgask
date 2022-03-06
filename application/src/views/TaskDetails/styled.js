@@ -64,27 +64,6 @@ export const DetailsBox = styled.div`
         color: #707070;
     }
 
-    .assunto-tarefa {
-        display: flex;
-        flex-direction: left;
-        align-items: center;
-        margin-left: 50px;
-        margin-top: -25px;
-        color: #707070;
-
-        button {
-            width: 50px;
-            height: 20px;
-            color: #FFF;
-            background: green;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-    }
-
     .data-tarefa {
         display: flex;
         width: 45%;

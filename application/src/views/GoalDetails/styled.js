@@ -64,29 +64,30 @@ export const DetailsBox = styled.div`
         color: #707070;
     }
 
-    .assunto-meta {
+    .mostrar-tarefas {
         display: flex;
+        width: 84%;
+        justify-content: flex-end;
         flex-direction: left;
         align-items: center;
         margin-left: 50px;
-        margin-top: -25px;
+        margin-top: 0;
         color: #707070;
 
-        img {
-            width: 20px;
-            margin-top: 5px;
-        }
-
-        button {
-            width: 50px;
-            height: 20px;
+        .btn-mostrar-tarefas {
+            width: 70px;
+            height: auto;
             color: #FFF;
-            background: green;
+            background: #707070;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             font-weight: bold;
             margin-left: 10px;
+
+            &:hover {
+                opacity: 50%;
+            }
         }
 
         .nova-tarefa {

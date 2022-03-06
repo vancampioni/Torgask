@@ -3,22 +3,19 @@ import { format } from 'date-fns';
 import * as S from './styled';
 
 
-function TaskCard({ assunto, nome, data_agendada } ) {
-    const date = useMemo(() => format(new Date(data_agendada), 'dd/MM/yyyy') );
-    const hour = useMemo(() => format(new Date(data_agendada), 'HH:mm') );
-
+function TaskCard({ nome, data_agendada } ) {
+    const data = data_agendada
+    const hora = data_agendada
+    console.log(hora)
 
     return (
       <S.Container>
           <S.TopArea>
-              <S.Subject>
-                  <span>{ assunto }</span>
-              </S.Subject>
               <h3>{ nome }</h3>
           </S.TopArea>
           <S.BottomArea>
-              <strong>{ date }</strong>
-              <span>{ hour }</span>
+              <strong>{ data }</strong>
+              <span>{ hora }</span>
           </S.BottomArea>
       </S.Container>
     )

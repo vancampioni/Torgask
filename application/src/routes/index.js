@@ -11,22 +11,25 @@ import Register from '../views/Register';
 import LateTasks from '../views/LateTasks';
 import TaskDetails from '../views/TaskDetails';
 import GoalDetails from '../views/GoalDetails';
+import NotFound from '../components/NotFound';
 
 
 export default function Routes() {
+
     return(
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Login} />
+                <Route path="/authenticate" exact component={Login} />
                 <Route path="/register" exact component={Register} />
-                <Route path="/users/:user_id/home" exact component={Home} />
-                <Route path="/goals/:goal_id/tasks/filter/index" exact component={Task} />
-                <Route path="/users/:user_id/goal" exact component={NewGoal} />
-                <Route path="/goals/:goal_id/tasks" exact component={NewTask} />
-                <Route path="/goals/:goal_id/tasks/:id" exact component={TaskDetails} />
-                <Route path="/users/:user_id/goals" exact component={Goal} />
-                <Route path="/users/:user_id/goals/:id" exact component={GoalDetails} />
-                <Route path="/goals/:goal_id/tasks/filter/late" exact component={LateTasks} />
+                <Route path="/home" exact component={Home} />
+                <Route path="/tasks" exact component={Task} />
+                <Route path="/goal" exact component={NewGoal} />
+                <Route path="/task" exact component={NewTask} />
+                <Route path="/tasks/:id" exact component={TaskDetails} />
+                <Route path="/goals" exact component={Goal} />
+                <Route path="/goals/:id" exact component={GoalDetails} />
+                <Route path="/tasks/filter/late" exact component={LateTasks} />
+                <Route path="/error" exact component={NotFound} />
                 
             </Switch>
         </BrowserRouter>

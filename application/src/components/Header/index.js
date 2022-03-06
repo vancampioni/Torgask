@@ -13,13 +13,13 @@ function Header({ lateCount, clickNotification }) {
         </S.LeftSide>
 
         <S.RightSide>
-          <Link to="/users/:user_id/home">INÍCIO</Link>
+          <Link to="/home">INÍCIO</Link>
           <span className="dividir"/>
-          <Link to="/users/1/goals">METAS</Link>
+          <Link to="/goals">METAS</Link>
           <span className="dividir"/>
-          <Link to="/goals/:goal_id/tasks/filter/index">TAREFAS</Link>
+          <Link to="/tasks">TAREFAS</Link>
           <span className="dividir"/>
-          <Link to="/goals/:goal_id/tasks/filter/late">
+          <Link to="/tasks/filter/late">
             <button id="notification">
               <img src={bell} alt="Notificacao" />
               <span>{lateCount}</span>

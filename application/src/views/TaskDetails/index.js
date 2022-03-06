@@ -16,14 +16,14 @@ function TaskDetails() {
     const [tasks, setTasks] = useState([]);
 
     async function loadTasks() {
-        await api.get(`/goals/1/tasks/filter/${filterActived}`)
+        await api.get(`/tasks/filter/${filterActived}`)
         .then(response => {
           setTasks(response.data)
         })
       };
     
       async function lateVerify() {
-        await api.get(`/goals/:goal_id/tasks/filter/late`)
+        await api.get(`/tasks/filter/late`)
         .then(response => {
           setLateCount(response.data.length)
         })
@@ -57,10 +57,6 @@ function TaskDetails() {
           </div>
           <div className='anotacao-tarefa'>
             <div className='texto-anotacao'>Texto</div>
-          </div>
-          <div className='assunto-tarefa'>
-            <h4>Assunto:</h4>
-            <button type='button'>C#</button>
           </div>
           <div className='data-tarefa'>
           <S.Date>

@@ -15,20 +15,19 @@ function NewTask() {
     const [descricao, setDescricao] = useState();
     const [data_inicio, setDataInicio] = useState();
     const [data_fim, setDataFim] = useState();
-    const [assunto, setAssunto] = useState();
 
     const [filterActived, setFilterActived] = useState('all');
     const [tasks, setTasks] = useState([]);
   
     async function loadTasks() {
-      await api.get(`/goals/1/tasks/filter/${filterActived}`)
+      await api.get(`/tasks/filter/${filterActived}`)
       .then(response => {
         setTasks(response.data)
       })
     };
   
     async function lateVerify() {
-      await api.get(`/goals/:goal_id/tasks/filter/late`)
+      await api.get(`/tasks/filter/late`)
       .then(response => {
         setLateCount(response.data.length)
       })
@@ -71,8 +70,6 @@ function NewTask() {
 
             </S.Date>
             <S.Options>
-                <p>Assunto: <input id="assunto" type="text"
-                  onChange={e => setAssunto(e.target.value)} value={assunto}/></p>
                 {/* <div>
                 
                 {/* <p><input type="checkbox" 
