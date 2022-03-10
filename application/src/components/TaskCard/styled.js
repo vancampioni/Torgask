@@ -34,7 +34,7 @@ export const TopArea = styled.div`
     flex-direction: column;
     border-bottom: 1px solid #707070;
 `
-export const Subject = styled.div`
+export const Assunto = styled.div`
     width: 200px;
     height: 40px;
     font-weight: bold;

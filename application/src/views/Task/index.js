@@ -14,6 +14,7 @@ import TaskCard from '../../components/TaskCard';
 function Tasks() {
   const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
+  const [goalId, setGoalId] = useState();
   const [lateCount, setLateCount] = useState();
   
 
