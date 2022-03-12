@@ -22,7 +22,7 @@ function auth(req, res, next) {
 routes.post('/authenticate', UserController.login);
 
 // Users
-routes.get('/users', auth, UserController.index);
+// routes.get('/users', auth, UserController.index);
 routes.post('/users', UserController.create);
 
 // Goals

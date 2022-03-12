@@ -20,15 +20,19 @@ module.exports = {
     },
 
     async create(req, res) {
-        const { nome, email, senha } = req.body;
-        const hashedPassword = hashPassword(senha);
-        const user = await User.create({ 
-            nome: nome,
-            email: email,
-            senha: hashedPassword 
-        });
-
-        return res.json(user);
+        try {
+            const { nome, email, senha } = req.body;
+            const hashedPassword = hashPassword(senha);
+            const user = await User.create({ 
+                nome: nome,
+                email: email,
+                senha: hashedPassword 
+            });
+             return res.json(user);
+           
+        } catch {
+            return res.status(400).send({ error: "Não foi possível realizar o cadastro!"});
+        }
     },
 
     async login(req, res) {

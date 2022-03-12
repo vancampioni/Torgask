@@ -6,6 +6,8 @@ import logo from '../../assets/logo-roxo.png';
 import api from '../../services/api';
 
 import swal from 'sweetalert';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 // COMPONENTES
 import Footer from '../../components/Footer';
@@ -25,6 +27,12 @@ function Register() {
 
   const history = useHistory();
 
+  const validate = Yup.object().shape({
+    nome: Yup.string().required("Campo obrigatório"),
+    email: Yup.string().required("Campo obrigatório").email(),
+    senha: Yup.string().required("Campo obrigatório").min(8, "Senha deve conter no mínimo 8 caracteres")
+  })
+
   api.defaults.withCredentials = false;
 
   const register = () => {
@@ -43,6 +51,13 @@ function Register() {
           .then((value) => {
             history.push('authenticate')
           })
+      } else {
+        swal({
+          title: "Não foi possível concluir o cadastro!",
+          text: "Verifique os dados e tente novamente.",
+          icon: "error",
+          button: "Fechar",
+        })
       }
     });
   };
@@ -55,41 +70,61 @@ function Register() {
         <S.Logo>
           <img src={logo} alt="Logo" />
         </S.Logo>
-        <div className="login-page">
-          <div className="form">
-            <form className="login-form">
-              <input type="text" placeholder="Usuário" value={nome} onChange={e => setNome(e.target.value)} />
-              <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} />
-              <input type="password" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} />
 
-              <button type='button' class="btn btn-primary" onClick={register}>CADASTRAR</button>
+        <Formik
+          validationSchema={validate}
+          initialValues={{
+            nome: '',
+            email: '',
+            senha: ''
+          }}
+        >
+          {({errors}) => (
+            <div className="login-page">
+              <div className="form">
+                <Form className="login-form">
+                  <Field
+                    id="nome"
+                    name="nome"
+                    type="text"
+                    placeholder="nome"
+                    value={nome}
+                    onChange={e => setNome(e.target.value)} />
+                  {errors.nome && (
+                  <li className='field'>{errors.nome}</li>
+                )}
 
-            </form>
+                  <Field
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="example@email.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)} />
+                  {errors.email && (
+                  <li className='field'>{errors.email}</li>
+                )}
 
+                  <Field
+                    id="senha"
+                    name="senha"
+                    type="password"
+                    placeholder="senha"
+                    value={senha}
+                    onChange={e => setSenha(e.target.value)} />
+                  {errors.senha && (
+                  <li className='field'>{errors.senha}</li>
+                )}
 
-          </div>
-        </div>
+                  <button type='button' className="btn btn-primary" onClick={register}>CADASTRAR</button>
 
-        {/* <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-              <Link to='/authenticate'>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Fechar</button>
-              </Link>
+                </Form>
               </div>
             </div>
-          </div>
-        </div> */}
+          )}
+        </Formik>
+
+
 
       </S.Form>
       <Footer />
