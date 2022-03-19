@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import logo from '../../assets/logo-roxo.png';
-import { Context } from '../../services/context';
+import { ErrorMessage, Formik, Form, Field } from 'formik'
+import * as yup from 'yup'
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -10,10 +12,24 @@ import api from '../../services/api';
 import Footer from '../../components/Footer';
 
 function Login() {
-  const { authenticated, handleLogin } = useContext(Context);
-  console.debug('Login', authenticated);
   
+  const history = useHistory();
 
+  const handleSubmit = values => {
+    api.post('/auth', values)
+      .then(resp => {
+        const { data } = resp
+        if (data) {
+          localStorage.setItem('app-token', data)
+          history.push("/home")
+        }
+      })
+  }
+
+  const validations = yup.object().shape({
+    email: yup.string().email().required(),
+    senha: yup.string().min(8).required()
+  })
 
   return (
     <S.Container>
@@ -24,24 +40,41 @@ function Login() {
           <button type='button'>CADASTRE-SE</button>
         </Link>
       </S.RightSide>
-      
+
       <S.Login>
-      <S.Logo>
-        <img src={logo} alt="Logo" />
-      </S.Logo>
+        <S.Logo>
+          <img src={logo} alt="Logo" />
+        </S.Logo>
         <div className="login-page">
           <div className="form">
-            <form className="login-form">
-              <input type="text" placeholder="E-mail" />
-              <input type="password" placeholder="Senha" />
-              <button type='button' onClick={handleLogin}>ENTRAR</button>
-            </form>
+            <Formik
+              initialValues={{}}
+              onSubmit={handleSubmit}
+              validationSchema={validations}
+            >
+              <Form className="login-form">
+                <Field type="text" name="email" placeholder="E-mail" />
+                <ErrorMessage
+                  component="li"
+                  name="email"
+                  className="Login-Error"
+                />
+                <Field type="password" name="senha" placeholder="Senha" />
+                <ErrorMessage
+                  component="li"
+                  name="senha"
+                  className="Login-Error"
+                />
+                <button type='submit'>ENTRAR</button>
+              </Form>
+
+            </Formik>
           </div>
         </div>
-            </S.Login>
-            <Footer />
-          </S.Container>
-          );
-  }
+      </S.Login>
+      <Footer />
+    </S.Container>
+  );
+}
 
-          export default Login;
+export default Login;

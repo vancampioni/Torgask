@@ -74,7 +74,14 @@ export const Login = styled.div `
         margin: auto;
         display: flex;
         
+        .login-page:focus {
+            box-shadow: 0 4px 4px rgba(0, 0, 0, .5);
+            outline: none;
+        }
         
+        .Login-Error {
+            color: #ff8080;
+        }
     }
 
     .form input {

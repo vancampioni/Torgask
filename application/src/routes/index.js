@@ -19,7 +19,7 @@ export default function Routes() {
     return(
         <BrowserRouter>
             <Switch>
-                <Route path="/authenticate" exact component={Login} />
+                <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/home" exact component={Home} />
                 <Route path="/tasks" exact component={Task} />

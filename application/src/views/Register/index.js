@@ -20,14 +20,9 @@ function Register() {
 
   const history = useHistory();
 
-  const validations = yup.object().shape({
-    nome: yup.string().required(),
-    email: yup.string().email().required(),
-    senha: yup.string().min(8).required()
-  })
-
+  
   api.defaults.withCredentials = false;
-
+  
   const register = () => {
     api.post("/users", {
       nome: nome,
@@ -41,9 +36,9 @@ function Register() {
           icon: "success",
           button: "Fechar",
         })
-          .then((value) => {
-            history.push('login')
-          })
+        .then((value) => {
+          history.push('login')
+        })
       } else {
         swal({
           title: "Não foi possível concluir o cadastro!",
@@ -54,7 +49,13 @@ function Register() {
       }
     });
   };
-
+  
+  const validations = yup.object().shape({
+    nome: yup.string().required(),
+    email: yup.string().email().required(),
+    senha: yup.string().min(8).required()
+  })
+  
   return (
     <S.Container>
 

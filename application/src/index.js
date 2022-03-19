@@ -3,14 +3,10 @@ import ReactDOM from 'react-dom';
 
 import Rotas from './routes';
 
-import { AuthProvider } from './services/context'
-
 ReactDOM.render(
-  <AuthProvider>
     <React.StrictMode>
       <Rotas />
-    </React.StrictMode>
-  </AuthProvider>,
+    </React.StrictMode>,
     document.getElementById('root')
 );
 
