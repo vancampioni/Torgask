@@ -15,6 +15,7 @@ class User extends Model {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
                 validate: {
                     notEmpty: {
                         msg: "Campo EMAIL obrigatório!"
