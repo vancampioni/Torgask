@@ -41,11 +41,9 @@ export const Form = styled.div `
     width: 100%;
     margin-top: 100px;
 
-    .field {
+    .Login-Error {
         color: #edad9e;
         font-family: arial;
-        margin-bottom: 3px;
-        margin-top: -3px;
     }
 
     .login-page {

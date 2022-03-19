@@ -6,31 +6,24 @@ import logo from '../../assets/logo-roxo.png';
 import api from '../../services/api';
 
 import swal from 'sweetalert';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { ErrorMessage, Formik, Form, Field } from 'formik'
+import * as yup from 'yup';
 
 // COMPONENTES
 import Footer from '../../components/Footer';
 import { useHistory } from 'react-router-dom';
 
 function Register() {
-
-  const [nomeReg, setNomeReg] = useState();
-  const [emailReg, setEmailReg] = useState();
-  const [senhaReg, setSenhaReg] = useState();
-
   const [nome, setNome] = useState();
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
 
-  const [loginStatus, setLoginStatus] = useState();
-
   const history = useHistory();
 
-  const validate = Yup.object().shape({
-    nome: Yup.string().required("Campo obrigatório"),
-    email: Yup.string().required("Campo obrigatório").email(),
-    senha: Yup.string().required("Campo obrigatório").min(8, "Senha deve conter no mínimo 8 caracteres")
+  const validations = yup.object().shape({
+    nome: yup.string().required(),
+    email: yup.string().email().required(),
+    senha: yup.string().min(8).required()
   })
 
   api.defaults.withCredentials = false;
@@ -49,7 +42,7 @@ function Register() {
           button: "Fechar",
         })
           .then((value) => {
-            history.push('authenticate')
+            history.push('login')
           })
       } else {
         swal({
@@ -72,14 +65,10 @@ function Register() {
         </S.Logo>
 
         <Formik
-          validationSchema={validate}
-          initialValues={{
-            nome: '',
-            email: '',
-            senha: ''
-          }}
+          validationSchema={validations}
+          initialValues={{}}
         >
-          {({errors}) => (
+          
             <div className="login-page">
               <div className="form">
                 <Form className="login-form">
@@ -90,9 +79,11 @@ function Register() {
                     placeholder="nome"
                     value={nome}
                     onChange={e => setNome(e.target.value)} />
-                  {errors.nome && (
-                  <li className='field'>{errors.nome}</li>
-                )}
+                  <ErrorMessage
+                  component="li"
+                  name="nome"
+                  className="Login-Error"
+                />
 
                   <Field
                     id="email"
@@ -101,9 +92,11 @@ function Register() {
                     placeholder="example@email.com"
                     value={email}
                     onChange={e => setEmail(e.target.value)} />
-                  {errors.email && (
-                  <li className='field'>{errors.email}</li>
-                )}
+                  <ErrorMessage
+                  component="li"
+                  name="email"
+                  className="Login-Error"
+                />
 
                   <Field
                     id="senha"
@@ -112,16 +105,18 @@ function Register() {
                     placeholder="senha"
                     value={senha}
                     onChange={e => setSenha(e.target.value)} />
-                  {errors.senha && (
-                  <li className='field'>{errors.senha}</li>
-                )}
+                 <ErrorMessage
+                  component="li"
+                  name="senha"
+                  className="Login-Error"
+                />
 
                   <button type='button' className="btn btn-primary" onClick={register}>CADASTRAR</button>
 
                 </Form>
               </div>
             </div>
-          )}
+         
         </Formik>
 
 
