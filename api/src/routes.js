@@ -7,6 +7,7 @@ const routes = express.Router();
 
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../src/config/jwt.json');
+const AuthController = require('./controllers/AuthController');
 
 function auth(req, res, next) {
     const token = req.headers['x-access-token'];
@@ -19,7 +20,7 @@ function auth(req, res, next) {
 }
 
 // Login
-routes.post('/authenticate', UserController.login);
+routes.post('/auth', AuthController.login);
 
 // Users
 // routes.get('/users', auth, UserController.index);
