@@ -27,8 +27,8 @@ routes.post('/auth', AuthController.login);
 routes.post('/users', UserController.create);
 
 // Goals
-routes.get('/goals', auth, GoalsController.index);
-routes.post('/goals', auth, GoalsController.create);
+routes.get('/goals', GoalsController.index);
+routes.post('/goals', GoalsController.create);
 routes.put('/goals/:id', auth, GoalsController.update);
 routes.delete('/goals/:id', auth, GoalsController.delete);
 
