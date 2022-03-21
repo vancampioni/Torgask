@@ -14,10 +14,11 @@ import GoalCard from '../../components/GoalCard';
 function Goal() {
   const [filterActived, setFilterActived] = useState('all');
   const [tasks, setTasks] = useState([]);
+  const [goals, set] = useState([]);
   const [lateCount, setLateCount] = useState();
 
-  async function loadTasks() {
-    await api.get(`/tasks/filter/${filterActived}`)
+  async function loadGoals() {
+    await api.get(`/goals`)
     .then(response => {
       setTasks(response.data)
     })
@@ -36,7 +37,7 @@ function Goal() {
 
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
-    loadTasks();
+    loadGoals();
     lateVerify();
   }, [filterActived])
   
@@ -56,6 +57,13 @@ function Goal() {
         </Link>
 
         <S.GoalCardArea>
+        {
+          goals.map(g => (
+          <Link to={`/goals/${g._id}`}>
+            <GoalCard />   
+          </Link>
+          ))  
+        }
           <Link to="/goals/:id">
             <GoalCard />
           </Link>

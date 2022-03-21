@@ -75,6 +75,9 @@ function NewTask() {
                 
                 <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)}/>Concluída</p>
                 </div>
+                <div>
+                  ESPAÇO PARA COLOCAR O DROPDOWN DE META
+                </div>
                 
                 <span><button id="confirmar" type="button" onClick={Save}>CONFIRMAR</button></span>
                 
