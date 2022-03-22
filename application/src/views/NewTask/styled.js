@@ -58,7 +58,7 @@ export const TextArea = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
-` 
+`
 
 export const Date = styled.div`
     width: 100%;
@@ -98,6 +98,11 @@ export const Options = styled.div`
         background: #FFBEBE
     }
 
+    select {
+        width: 50%;
+        height: 35px;
+        margin-bottom: 10px;
+    }
 `
 
 

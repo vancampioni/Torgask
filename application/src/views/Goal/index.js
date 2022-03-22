@@ -13,14 +13,14 @@ import GoalCard from '../../components/GoalCard';
 
 function Goal() {
   const [filterActived, setFilterActived] = useState('all');
-  const [tasks, setTasks] = useState([]);
-  const [goals, set] = useState([]);
+  const [goals, setGoals] = useState([]);
   const [lateCount, setLateCount] = useState();
 
   async function loadGoals() {
     await api.get(`/goals`)
     .then(response => {
-      setTasks(response.data)
+      setGoals(response.data)
+      console.log(response.data)
     })
   };
 
@@ -59,14 +59,11 @@ function Goal() {
         <S.GoalCardArea>
         {
           goals.map(g => (
-          <Link to={`/goals/${g._id}`}>
-            <GoalCard />   
+          <Link to={`/goals/${g.id}`}>
+            <GoalCard/>  
           </Link>
           ))  
         }
-          <Link to="/goals/:id">
-            <GoalCard />
-          </Link>
 
         </S.GoalCardArea>
 

@@ -13,9 +13,8 @@ import TaskCard from '../../components/TaskCard';
 
 function Tasks() {
   const [filterActived, setFilterActived] = useState('index');
-  const [tasks, setTasks] = useState([]);
-  const [goalId, setGoalId] = useState();
   const [lateCount, setLateCount] = useState();
+  const [tasks, setTasks] = useState([]);
   
 
   async function loadTasks() {
@@ -66,7 +65,7 @@ function Tasks() {
         </S.FilterArea>
 
         <S.Title>
-          <h3>{filterActived == 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}</h3>
+          <h3>TAREFAS</h3>
         </S.Title>
 
         <Link to="/task">

@@ -7,25 +7,32 @@ import api from '../../services/api';
 // COMPONENTES
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { Dropdown } from 'bootstrap';
 
 function NewTask() {
-    const [lateCount, setLateCount] = useState();
-    const [id, setId] = useState();
-    // const [goal_id, setGoalId] = useState();
-    const [estado, setEstado] = useState(false);
-    const [nome, setNome] = useState();
-    const [anotacao, setAnotacao] = useState();
-    const [data, setData] = useState();
-    const [hora, setHora] = useState();
+  const [lateCount, setLateCount] = useState();
+  const [goal_id, setGoalId] = useState([]);
+  const [estado, setEstado] = useState(false);
+  const [nome, setNome] = useState();
+  const [anotacao, setAnotacao] = useState();
+  const [data, setData] = useState();
+  const [hora, setHora] = useState();
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
-    .then(response => {
-      setLateCount(response.data.length)
-    })
+      .then(response => {
+        setLateCount(response.data.length)
+      })
   };
 
- 
+  async function loadGoals() {
+    await api.get("/goals")
+    .then(response => {
+      setGoalId(response.data)
+    })
+  }
+
+
   async function Save() {
     await api.post('/tasks', {
       nome,
@@ -39,60 +46,64 @@ function NewTask() {
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
     lateVerify();
+    loadGoals();
   }, [])
 
-    return (
-      <S.Container>
-        <Header lateCount={lateCount} />
-        
-        <S.Title>
-          <h3> NOVA TAREFA </h3>
-        </S.Title>
+  return (
+    <S.Container>
+      <Header lateCount={lateCount} />
 
-        <S.Form>
-            <S.Input>
-            <h4>Título</h4>
-            <input type="text" onChange={e => setNome(e.target.value)} value={nome}/>
-            {/* <h4>Meta</h4>
-            <input type="text" onChange={e => setGoalId(e.target.value)} value={goal_id}/> */}
+      <S.Title>
+        <h3> NOVA TAREFA </h3>
+      </S.Title>
+
+      <S.Form>
+        <S.Input>
+          <h4>Título</h4>
+          <input type="text" onChange={e => setNome(e.target.value)} value={nome} />
 
 
-            </S.Input>
-            <S.TextArea>
-            <textarea rows={5} placeholder="Anotações: " 
-              onChange={e => setAnotacao(e.target.value)} value={anotacao}/>
 
-            </S.TextArea>
-            <S.Date>
-            <span>Data:</span>
-            <input type="date" onChange={e => setData(e.target.value)} value={data}/>
-            <span>Hora:</span>
-            <input type="time" onChange={e => setHora(e.target.value)} value={hora}></input>
+        </S.Input>
+        <S.TextArea>
+          <textarea rows={5} placeholder="Anotações: "
+            onChange={e => setAnotacao(e.target.value)} value={anotacao} />
 
-            </S.Date>
-            <S.Options>
-                <div>
-                
-                <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)}/>Concluída</p>
-                </div>
-                <div>
-                  ESPAÇO PARA COLOCAR O DROPDOWN DE META
-                </div>
-                
-                <span><button id="confirmar" type="button" onClick={Save}>CONFIRMAR</button></span>
-                
-                
-                <span><button id="cancelar" type="button">CANCELAR</button></span>
-                
-            </S.Options>
+        </S.TextArea>
+        <S.Date>
+          <span>Data:</span>
+          <input type="date" onChange={e => setData(e.target.value)} value={data} />
+          <span>Hora:</span>
+          <input type="time" onChange={e => setHora(e.target.value)} value={hora}></input>
 
-            
-        </S.Form>
+        </S.Date>
+        <S.Options>
+          <div>
+            <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)} />Concluída</p>
+          </div>
+          <div className='dropdown'>
+            <select onChange={e => setGoalId(e.target.value)} value={goal_id}>
+              {
+                goal_id.map(g => (
+                  <option>{g.nome}</option>
+                ))
+              }
+            </select>
+          </div>
 
-        <Footer />
-      </S.Container>
-    );
-  }
-  
-  export default NewTask;
-  
+          <span><button id="confirmar" type="button" onClick={Save}>CONFIRMAR</button></span>
+
+
+          <span><button id="cancelar" type="button">CANCELAR</button></span>
+
+        </S.Options>
+
+
+      </S.Form>
+
+      <Footer />
+    </S.Container>
+  );
+}
+
+export default NewTask;
