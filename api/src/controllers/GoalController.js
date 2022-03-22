@@ -10,6 +10,11 @@ module.exports = {
         return res.json(goals);
     },
 
+    async goalById(req, res) {
+        const goal = await Goal.findByPk();
+        return res.json(goal);
+    },
+
     async create(req, res) {
 
         const { user_id, nome, descricao, estado, data_inicio, data_fim } = req.body;

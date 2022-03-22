@@ -28,21 +28,22 @@ routes.post('/users', UserController.create);
 
 // Goals
 routes.get('/goals', GoalsController.index);
+routes.get('/goals/:id', GoalsController.goalById);
 routes.post('/goals', GoalsController.create);
-routes.put('/goals/:id', auth, GoalsController.update);
-routes.delete('/goals/:id', auth, GoalsController.delete);
+routes.put('/goals/:id',  GoalsController.update);
+routes.delete('/goals/:id',  GoalsController.delete);
 
 // Tasks
 routes.get('/goal/:id/tasks', TaskController.getByGoal);
-routes.post('goal/:id/task', auth, TaskController.create);
-routes.put('goal/:id/tasks/:id', auth, TaskController.update);
-routes.delete('goal/:id/task/:id', auth, TaskController.delete);
-routes.get('/tasks/filter/late', auth, TaskController.late);
-routes.get('/tasks/filter/index', auth, TaskController.index);
-routes.get('/tasks/filter/today', auth, TaskController.today);
-routes.get('/tasks/filter/week', auth, TaskController.week);
-routes.get('/tasks/filter/month', auth, TaskController.month);
-routes.get('/tasks/filter/year', auth, TaskController.year);
+routes.post('/task', TaskController.create);
+routes.put('goal/:id/tasks/:id', TaskController.update);
+routes.delete('goal/:id/task/:id', TaskController.delete);
+routes.get('/tasks/filter/late', TaskController.late);
+routes.get('/tasks/filter/index', TaskController.index);
+routes.get('/tasks/filter/today', TaskController.today);
+routes.get('/tasks/filter/week', TaskController.week);
+routes.get('/tasks/filter/month', TaskController.month);
+routes.get('/tasks/filter/year', TaskController.year);
 
 
 module.exports = routes;

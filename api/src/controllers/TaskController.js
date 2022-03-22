@@ -29,14 +29,8 @@ module.exports = {
     },
 
     async create(req, res) {
-        const { goal_id } = req.params;
 
-        const { nome, anotacao, assunto, estado, data_agendada } = req.body;
-
-        const goal = await Goal.findByPk(goal_id);
-        if (!goal) {
-            return res.status(400).json({ error: 'Cadastre uma meta primeiro!' });
-        }
+        const { nome, anotacao, assunto, estado, data_agendada, goal_id } = req.body;
 
         const task = await Task.create({ 
             nome, 
@@ -52,19 +46,11 @@ module.exports = {
 
     async update(req, res) {
         try {
-            const { goal_id } = req.params;
-
-            const { nome, anotacao, assunto, estado, data_agendada } = req.body;
-
-            const goal = await Goal.findByPk(goal_id);
-            if (!goal) {
-                return res.status(400).json({ error: 'Meta não encontrada.' });
-            }
+            const { nome, anotacao, assunto, estado, data_agendada, goal_id } = req.body;
 
             await Task.update(
-                { nome, anotacao, assunto, estado, data_agendada },
+                { nome, anotacao, assunto, estado, data_agendada, goal_id },
                 {
-                    where: { goal_id: req.params.goal_id },
                     where: { id: req.params.id }
                 }
             )
