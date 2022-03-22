@@ -38,7 +38,7 @@ module.exports = {
             assunto,
             estado, 
             data_agendada, 
-            goal_id,  
+            goal_id: 1,  
         });
 
         return res.json(task);
@@ -100,7 +100,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfDay(current.getUTCDate()), [Op.lte]: endOfDay(current.getUTCDate()) 
+                   [Op.gte]: startOfDay(current), [Op.lte]: endOfDay(current) 
                }
            } 
         });
@@ -111,7 +111,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfWeek(current.getUTCDate()), [Op.lte]: endOfWeek(current.getUTCDate()) 
+                   [Op.gte]: startOfWeek(current), [Op.lte]: endOfWeek(current) 
                }
            } 
         });
@@ -122,7 +122,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfMonth(current.getUTCDate()), [Op.lte]: endOfMonth(current.getUTCDate()) 
+                   [Op.gte]: startOfMonth(current), [Op.lte]: endOfMonth(current) 
                }
            } 
         });
@@ -133,7 +133,7 @@ module.exports = {
         const tasks = await Task.findAll({
            where: {
                data_agendada: {
-                   [Op.gte]: startOfYear(current.getUTCDate()), [Op.lte]: endOfYear(current.getUTCDate()) 
+                   [Op.gte]: startOfYear(current), [Op.lte]: endOfYear(current) 
                }
            } 
         });
