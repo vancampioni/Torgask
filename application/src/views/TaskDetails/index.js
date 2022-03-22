@@ -12,11 +12,11 @@ function TaskDetails() {
   const [lateCount, setLateCount] = useState();
     const [data, setData] = useState();
     const [hora, setHora] = useState();
-    const [filterActived, setFilterActived] = useState('all');
+    const [filterActived, setFilterActived] = useState();
     const [tasks, setTasks] = useState([]);
 
     async function loadTasks() {
-        await api.get(`/tasks/filter/${filterActived}`)
+        await api.get(`/tasks/filter/index`)
         .then(response => {
           setTasks(response.data)
         })
@@ -52,6 +52,7 @@ function TaskDetails() {
 
       <S.DetailsArea>
         <S.DetailsBox>
+          
           <div className='nome-tarefa'>
             <h3>Nome</h3>
           </div>

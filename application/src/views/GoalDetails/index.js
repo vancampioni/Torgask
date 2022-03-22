@@ -20,7 +20,7 @@ function GoalDetails() {
   const [lateCount, setLateCount] = useState();
   const [data, setData] = useState();
   const [hora, setHora] = useState();
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
   const [goalId, setGoalId] = useState();
 
@@ -91,11 +91,14 @@ function GoalDetails() {
       </S.DetailsArea >
 
       <T.TaskCardArea>
-          {
-            tasks.map(t => (
-              <TaskCard />
-            ))
-          }
+      {
+          tasks.map(t => (
+          <Link to={`/tasks/${t._id}`}>
+            <TaskCard 
+              />    
+          </Link>
+          ))  
+        }
 
         </T.TaskCardArea>
 

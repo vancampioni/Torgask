@@ -4,9 +4,12 @@ import * as S from './styled';
 
 
 function TaskCard({ nome, assunto, data_agendada } ) {
-    const data = useMemo(() => format(new Date(data_agendada), 'dd/MM/yyyy'));
-    const hora = useMemo(() => format(new Date(data_agendada), 'HH:mm'));
-    
+    // const data = useMemo(() => format(new Date(data_agendada), 'dd/MM/yyyy'));
+    // const hora = useMemo(() => format(new Date(data_agendada), 'HH:mm'));
+    const data = data_agendada
+    const hora = data_agendada
+    console.log(data)
+    console.log(hora)
 
     return (
       <S.Container>

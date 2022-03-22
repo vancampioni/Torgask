@@ -14,7 +14,7 @@ import TaskCard from '../../components/TaskCard';
 
 function Home() {
   const [lateCount, setLateCount] = useState(false);
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('index');
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)

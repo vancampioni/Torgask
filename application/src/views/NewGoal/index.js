@@ -19,7 +19,7 @@ function NewGoal() {
   const [data_fim, setDataFim] = useState();
   const history = useHistory();
 
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
 
   const newGoal = () => {

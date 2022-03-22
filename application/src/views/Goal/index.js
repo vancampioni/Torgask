@@ -12,7 +12,7 @@ import Footer from '../../components/Footer';
 import GoalCard from '../../components/GoalCard';
 
 function Goal() {
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('index');
   const [goals, setGoals] = useState([]);
   const [lateCount, setLateCount] = useState();
 

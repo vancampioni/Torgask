@@ -46,8 +46,8 @@ function Tasks() {
 
         <Header lateCount={lateCount} clickNotification={Notification} />
         <S.FilterArea>
-          <button type="button" onClick={() => setFilterActived("all")}>
-            <Filter title="Todos" actived={filterActived == 'all'} onClick={() => setFilterActived("all")}/>
+          <button type="button" onClick={() => setFilterActived("index")}>
+            <Filter title="Todos" actived={filterActived == 'index'} onClick={() => setFilterActived("index")}/>
           </button>
           <button type="button" onClick={() => setFilterActived("today")}>
             <Filter title="Hoje"actived={filterActived == 'today'} onClick={() => setFilterActived("today")}/>

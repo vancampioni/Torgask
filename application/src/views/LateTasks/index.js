@@ -11,7 +11,7 @@ import TaskCard from '../../components/TaskCard';
 
 function LateTasks() {
   //const [goalActived, setGoalActived] = useState();
-  const [filterActived, setFilterActived] = useState('all');
+  const [filterActived, setFilterActived] = useState('late');
   const [tasks, setTasks] = useState([]);
   const [lateCount, setLateCount] = useState();
 

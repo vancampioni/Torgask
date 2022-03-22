@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import { format } from 'date-fns';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -12,11 +14,13 @@ import { Dropdown } from 'bootstrap';
 function NewTask() {
   const [lateCount, setLateCount] = useState();
   const [goal_id, setGoalId] = useState([]);
+  const [goal, setGoal] = useState([]);
   const [estado, setEstado] = useState(false);
   const [nome, setNome] = useState();
   const [anotacao, setAnotacao] = useState();
   const [data, setData] = useState();
   const [hora, setHora] = useState();
+  const history = useHistory();
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
@@ -28,18 +32,32 @@ function NewTask() {
   async function loadGoals() {
     await api.get("/goals")
     .then(response => {
-      setGoalId(response.data)
+      setGoal(response.data)
     })
   }
 
 
   async function Save() {
-    await api.post('/tasks', {
+    await api.post('/task', {
       nome,
       anotacao,
       estado,
       data_agendada: `${data}T${hora}`,
-    }).then(() => alert('TAREFA CADASTRADA COM SUCESSO!')
+      goal
+      
+    }).then(
+      (response) => {
+        if (response.status == 200) {
+          swal({
+            title: "Tarefa cadastrada com sucesso!",
+            icon: "success",
+            button: "OK",
+          })
+            .then((value) => {
+              history.push('tasks')
+            })
+        }
+      }
     )
   }
 
@@ -82,10 +100,10 @@ function NewTask() {
             <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)} />Concluída</p>
           </div>
           <div className='dropdown'>
-            <select onChange={e => setGoalId(e.target.value)} value={goal_id}>
+            <select >
               {
-                goal_id.map(g => (
-                  <option>{g.nome}</option>
+                goal.map(g => (
+                  <option onChange={e => setGoal(e.target.value)} value={goal.id}>{g.nome}</option>
                 ))
               }
             </select>
