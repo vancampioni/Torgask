@@ -16,6 +16,10 @@ const {
 
 module.exports = {
     
+    async getById(req, res) {
+        const task = await Task.findByPk();
+        return res.json(task);
+    },
 
     async getByGoal(req, res) {
         const { goal_id } = req.params;
