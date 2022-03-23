@@ -20,9 +20,17 @@ function GoalDetails() {
   const [lateCount, setLateCount] = useState();
   const [data, setData] = useState();
   const [hora, setHora] = useState();
+  const [nome, setNome] = useState();
   const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
-  const [goalId, setGoalId] = useState();
+  const [goal, setGoal] = useState();
+
+  async function loadGoals() {
+    await api.get("/goals")
+    .then(response => {
+      setGoal(response.data)
+    })
+  }
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
@@ -36,7 +44,7 @@ function GoalDetails() {
   }
 
   async function mostrarTarefas() {
-    await api.get(`/goal/${goalId}/tasks`)
+    await api.get(`/goal/${goal}/tasks`)
       .then(response => {
         setTasks(response.data)
       })
@@ -46,6 +54,7 @@ function GoalDetails() {
   useEffect(() => {
     lateVerify();
     mostrarTarefas();
+    loadGoals()
   }, [filterActived])
 
   return (
@@ -62,12 +71,16 @@ function GoalDetails() {
       <S.DetailsArea>
         <S.DetailsBox>
           <div className='nome-meta'>
-            <h3>Nome</h3>
+            {
+              goal.map(g => (
+                <input onChange={e => setNome(e.target.value)}>{g.id}</input>
+              ))
+            }
           </div>
           <div className='anotacao-meta'>
             <div className='texto-anotacao'>Texto</div>
           </div>
-          
+
           <S.Date>
             <span>Data:</span>
             <input type="date" onChange={e => setData(e.target.value)} value={data} />
@@ -87,20 +100,20 @@ function GoalDetails() {
           </div>
         </S.DetailsBox>
 
-        
+
       </S.DetailsArea >
 
       <T.TaskCardArea>
-      {
+        {
           tasks.map(t => (
-          <Link to={`/tasks/${t._id}`}>
-            <TaskCard 
-              />    
-          </Link>
-          ))  
+            <Link to={`/tasks/${t._id}`}>
+              <TaskCard
+              />
+            </Link>
+          ))
         }
 
-        </T.TaskCardArea>
+      </T.TaskCardArea>
 
       <Footer />
     </S.Container >

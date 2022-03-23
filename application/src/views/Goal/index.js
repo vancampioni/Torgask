@@ -60,7 +60,9 @@ function Goal() {
         {
           goals.map(g => (
           <Link to={`/goals/${g.id}`}>
-            <GoalCard/>  
+            <GoalCard
+              nome={g.nome}
+            />  
           </Link>
           ))  
         }
