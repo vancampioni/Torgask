@@ -11,10 +11,14 @@ import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
 import TaskCard from '../../components/TaskCard';
 
-function Tasks() {
+function Tasks({match}) {
   const [filterActived, setFilterActived] = useState('index');
   const [lateCount, setLateCount] = useState();
   const [tasks, setTasks] = useState([]);
+  const [nome, setNome] = useState();
+  const [assunto, setAssunto] = useState();
+  const [data, setData] = useState();
+  const [hora, setHora] = useState();
 
 
   async function loadTasks() {
@@ -23,6 +27,16 @@ function Tasks() {
         setTasks(response.data)
       })
   };
+
+  // async function loadTaskDetails() {
+  //   await api.get(`tasks/${match.params.id}`)
+  //   .then(response => {
+  //     setNome(response.data.nome)
+  //     setAssunto(response.data.assunto)
+  //     setData(new Date(response.data.data_agendada))
+  //     setHora(new Date(response.data.data_agendada))
+  //   })
+  // }
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
@@ -39,6 +53,7 @@ function Tasks() {
   useEffect(() => {
     loadTasks();
     lateVerify();
+    // loadTaskDetails();
   }, [filterActived])
 
   return (

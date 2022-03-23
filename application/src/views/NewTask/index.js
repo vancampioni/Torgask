@@ -18,6 +18,7 @@ function NewTask() {
   const [estado, setEstado] = useState(false);
   const [nome, setNome] = useState();
   const [anotacao, setAnotacao] = useState();
+  const [assunto, setAssunto] = useState();
   const [data, setData] = useState();
   const [hora, setHora] = useState();
   const history = useHistory();
@@ -41,6 +42,7 @@ function NewTask() {
     await api.post('/task', {
       nome,
       anotacao,
+      assunto,
       estado,
       data_agendada: `${data}T${hora}`,
       goal
@@ -96,6 +98,9 @@ function NewTask() {
 
         </S.Date>
         <S.Options>
+          <div>
+            <span>Assunto: <input type={"text"} onChange={e => setAssunto(e.target.value)} value={assunto}/></span>
+          </div>
           <div>
             <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)} />Concluída</p>
           </div>
