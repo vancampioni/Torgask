@@ -17,7 +17,8 @@ const {
 module.exports = {
     
     async getById(req, res) {
-        const task = await Task.findByPk();
+        const { id } = req.params
+        const task = await Task.findByPk(id);
         return res.json(task);
     },
 

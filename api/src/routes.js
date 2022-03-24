@@ -38,7 +38,7 @@ routes.get('/goal/:id/tasks', TaskController.getByGoal);
 routes.get('/tasks/:id', TaskController.getById);
 routes.post('/task', TaskController.create);
 routes.put('goal/:id/tasks/:id', TaskController.update);
-routes.delete('goal/:id/task/:id', TaskController.delete);
+routes.delete('goal/:id/tasks/:id', TaskController.delete);
 routes.get('/tasks/filter/late', TaskController.late);
 routes.get('/tasks/filter/index', TaskController.index);
 routes.get('/tasks/filter/today', TaskController.today);

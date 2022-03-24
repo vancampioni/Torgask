@@ -11,7 +11,9 @@ module.exports = {
     },
 
     async goalById(req, res) {
-        const goal = await Goal.findByPk();
+        const { goal_id } = req.params
+        
+        const goal = await Goal.findByPk(goal_id);
         return res.json(goal);
     },
 
