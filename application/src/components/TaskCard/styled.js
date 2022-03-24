@@ -32,7 +32,6 @@ export const TopArea = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border-bottom: 1px solid #707070;
 `
 export const Assunto = styled.div`
     width: 200px;
@@ -49,6 +48,7 @@ export const BottomArea = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-around;
+    margin-top: 15px;
 
     strong {
         font-weight: bold;

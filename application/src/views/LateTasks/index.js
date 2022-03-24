@@ -49,11 +49,18 @@ function LateTasks() {
         </S.Title>        
 
         <S.TaskCardArea>
-          {
-            tasks.map(t => (
-                <TaskCard  />
-            ))
-          }
+        {
+          tasks.map(t => (
+            <Link to={`/tasks/${t.id}`}>
+              <TaskCard
+                nome={t.nome}
+                assunto={t.assunto}
+                data_agendada={t.data_agendada}
+              />
+            </Link>
+          ))
+        }
+
         </S.TaskCardArea>
         
         <Footer />
