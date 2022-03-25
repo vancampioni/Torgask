@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import plus from '../../assets/plus-square.png';
 
 
@@ -15,6 +15,8 @@ function Goal() {
   const [filterActived, setFilterActived] = useState('index');
   const [goals, setGoals] = useState([]);
   const [lateCount, setLateCount] = useState();
+  const [user, setUser] = useState();
+  const { user_id } = useParams();
 
   async function loadGoals() {
     await api.get(`/goals`)
@@ -31,6 +33,13 @@ function Goal() {
     })
   };
 
+  async function getUser() {
+    await api.get(`/users`)
+    .then(response => {
+      setUser(response.data.length)
+    })
+  };
+
   function Notification() {
     setFilterActived('late');
   }
@@ -39,6 +48,7 @@ function Goal() {
   useEffect(() => {
     loadGoals();
     lateVerify();
+    getUser();
   }, [filterActived])
   
 
@@ -59,7 +69,7 @@ function Goal() {
         <S.GoalCardArea>
         {
           goals.map(g => (
-          <Link to={`/goals/${g.id}`}>
+          <Link to={`user/${user_id}/goals/${g.id}`}>
             <GoalCard
               nome={g.nome}
             />  

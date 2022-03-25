@@ -25,12 +25,16 @@ function TaskDetails() {
   const [assunto, setAssunto] = useState();
   const [estado, setEstado] = useState();
   const { id } = useParams();
-  const idInt = parseInt(id);
 
   async function loadTaskDetails() {
-    await api.get(`/tasks/${idInt}`)
+    await api.get(`/tasks/${id}`)
       .then(response => {
-        console.log(response.data)
+        setNome(response.data.nome)
+        setAnotacao(response.data.anotacao)
+        setAssunto(response.data.assunto)
+        setData(response.data.data_agendada)
+        setHora(response.data.data_agendada)
+        setEstado(response.data.estado)
       })
   }
 
@@ -45,13 +49,7 @@ function TaskDetails() {
     setFilterActived('late');
   }
 
-  // async function Remove(){
-  //   const res = window.confirm('Deseja realmente remover a tarefa?')
-  //   if(res == true){
-  //     await api.delete(`/tasks/${id}`)
-  //     .then(() => setRedirect(true));
-  //   }
-  // }
+  
 
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
@@ -69,21 +67,17 @@ function TaskDetails() {
       <S.Title>
         <h3>DETALHES DA TAREFA</h3>
       </S.Title>
-      {/* {
-          task.map(t => (
-            <Link to={`/tasks/${t.id}`}>
-              <TaskCardDetails
-                nome={t.nome}
-                anotacao={t.anotacao}
-                assunto={t.assunto}
-                data_agendada={t.data_agendada}
-                estado={t.estado}
-              />
-            </Link>
-          ))
-        } */}
-      <TaskCardDetails />
 
+      <TaskCardDetails
+        nome={nome}
+        anotacao={anotacao}
+        data={data}
+        hora={hora}
+        assunto={assunto}
+        estado={estado}
+      />
+
+     
       <Footer />
     </S.Container >
   );

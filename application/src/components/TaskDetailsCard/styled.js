@@ -45,23 +45,64 @@ export const DetailsBox = styled.div`
     font-family: arial;
 
     .nome-tarefa {
-        border-bottom: 1px solid #707070;
-        color: #707070;
+        display: flex;
+        width: 100%;
+        height: 50px;
+
+        input {
+            width: 600px;
+            height: 30px;
+            text-align: center;
+            position: static;
+            border-radius: 10px;
+            border: none;
+            font-family: arial;
+            font-size: 18px;
+            font-weight: bold;
+            color: #707070;
+            padding-top: 15px;
+        }
     }
 
     .anotacao-tarefa {
-        border: 1px solid #707070;
-        width: 500px;
-        height: 120px;
-        border-radius: 10px;
-        margin: 10px 50px
+        display: flex;
         
+        
+        input {
+            width: 500px;
+            height: 120px;
+            border-radius: 10px;
+            margin: 10px 50px
+            
+        }
     }
 
     .texto-anotacao {
-        margin-top: 10px;
         font-family: arial;
         color: #707070;
+        margin-left: 10px;
+    }
+
+    .assunto-tarefa {
+        display: flex;
+        margin-left: 50px;
+        padding-bottom: 15px;
+        span {
+            color: #707070;
+            margin-right: 5px;
+            margin-top: 6px;
+        }
+        input {
+            width: 80px;
+            height: 25px;
+            border-radius: 10px;
+            color: #FFF;
+            background: #C409FB;
+            font-family: arial;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+        }
     }
 
     .data-tarefa {

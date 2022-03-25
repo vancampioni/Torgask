@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as S from './styled';
 import logo from '../../assets/logo-roxo.png';
 import smile from '../../assets/smile-wink.png';
@@ -15,6 +15,8 @@ import TaskCard from '../../components/TaskCard';
 function Home() {
   const [lateCount, setLateCount] = useState(false);
   const [filterActived, setFilterActived] = useState('index');
+  const [user, setUser] = useState();
+  const { user_id } = useParams();
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
@@ -23,13 +25,15 @@ function Home() {
     })
   };
 
+  
+
   function Notification() {
     setFilterActived('late');
-  }
+  };
 
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
-    lateVerify();
+    lateVerify()
   }, [filterActived])
   
     return (

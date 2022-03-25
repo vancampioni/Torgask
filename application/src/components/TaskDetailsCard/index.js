@@ -1,25 +1,45 @@
 import React from 'react';
 import * as S from './styled';
+import api from '../../services/api';
+import { useParams, useHistory, Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
-function TaskDetailsCard({nome, anotacao, assunto, data_agendada, estado}) {
+function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
+    const { id } = useParams();
+    const { history } = useHistory();
+
+    async function Remove(){
+        const res = window.confirm('Deseja realmente remover a tarefa?')
+        if(res == true){
+          await api.delete(`/tasks/${id}`)
+          .then(
+            swal({
+                title: "Tarefa removida com sucesso!",
+                icon: "success",
+                button: "OK",
+              })
+          )
+        }
+      }
 
     return (
         <S.DetailsArea>
             <S.DetailsBox>
 
                 <div className='nome-tarefa'>
-                    <h3>{nome}</h3>
+                    <input value={nome}/>
                 </div>
                 <div className='anotacao-tarefa'>
-                    <div className='texto-anotacao'>{anotacao}</div>
+                    <input className='texto-anotacao'value={anotacao}/>
                 </div>
                 <div className='assunto-tarefa'>
-                    <div className='texto-assunto'>{assunto}</div>
+                    <span>Assunto:</span>
+                    <input className='texto-assunto' value={assunto}/>
                 </div>
                 <div className='data-tarefa'>
                     <S.Date>
                         <span>Data:</span>
-                        <span>{data_agendada}</span>
+                        <input value={data}/>
 
                     </S.Date>
                 </div>
@@ -28,8 +48,10 @@ function TaskDetailsCard({nome, anotacao, assunto, data_agendada, estado}) {
                         <input type='checkbox' value={estado} />
                     </div>
                     <div className='buttons'>
-                        <button className='action-button' type='button' >EDITAR</button>
-                        <button id='excluir-button' className='action-button' type='button'  >EXCLUIR</button>
+                        <Link to='/tasks'>
+                        <button className='action-button' type='button' >SALVAR</button>
+                        <button id='excluir-button' className='action-button' type='button' onClick={Remove} >EXCLUIR</button>
+                        </Link>
                     </div>
                 </div>
             </S.DetailsBox>

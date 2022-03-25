@@ -4,7 +4,7 @@ import * as S from './styled';
 import api from '../../services/api';
 
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 // COMPONENTES
 import Header from '../../components/Header';
@@ -17,18 +17,21 @@ function NewGoal() {
   const [estado, setEstado] = useState(false);
   const [data_inicio, setDataInicio] = useState();
   const [data_fim, setDataFim] = useState();
+  const [user, setUser] = useState();
+  const { user_id } = useParams();
   const history = useHistory();
 
   const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
 
   const newGoal = () => {
-    api.post("/goals", {
+    api.post(`user/${user_id}/goals`, {
       nome: nome,
       descricao: descricao,
       estado: estado,
       data_inicio: data_inicio,
-      data_fim: data_fim
+      data_fim: data_fim,
+      user_id: parseInt(user_id)
     }).then((response) => {
       if (response.status == 200) {
         swal({
@@ -41,6 +44,13 @@ function NewGoal() {
           })
       }
     });
+  };
+
+  async function getUser() {
+    await api.get(`/users`)
+    .then(response => {
+      setUser(response.data.length)
+    })
   };
 
   async function lateVerify() {
@@ -57,6 +67,7 @@ function NewGoal() {
   // Recarregar as atividades na tela quando o filtro mudar
   useEffect(() => {
     lateVerify();
+    getUser();
   }, [filterActived])
 
   return (

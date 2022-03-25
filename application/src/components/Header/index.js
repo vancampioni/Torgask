@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo-cinza.png';
 import bell from '../../assets/bell.png'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Header({ lateCount, clickNotification }) {
+    const { user_id } = useParams();
+    
     return (
       <S.Container>
         <S.LeftSide>
