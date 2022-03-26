@@ -5,30 +5,41 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 
-function GoalDetailsCard(props) {
+function GoalDetailsCard() {
     const { id } = useParams();
-     let name = props.nome
-    const [initialValues, setInitialValues]  = useState({
-        nome: name,
-        descricao: props.descricao,
-        data_inicio: props.data_inicio,
-        data_fim: props.data_fim,
-        estado: props.estado
-    }) 
-    useEffect(() => {
-        setInitialValues()
-        console.log(initialValues)
-    }, [initialValues])
-    const [values, setValues] = useState(initialValues);
-    console.log(initialValues)
+    const [nome, setNome] = useState();
+    const [descricao, setDescricao] = useState();
+    const [data_inicio, setDataInicio] = useState();
+    const [data_fim, setDataFim] = useState();
+    const [estado, setEstado] = useState();
+    
+    async function loadGoalDetails() {
+        await api.get(`/goals/${id}`)
+          .then(response => {
+            setNome(response.data.nome)
+            setDescricao(response.data.descricao)
+            setDataInicio(response.data.data_inicio)
+            setDataFim(response.data.data_fim)
+            setEstado(response.data.estado)
+          })
+      }
 
-    function onChange(name, value) {
-        // const { name, values } = event.target;
-        //console.log(nome)
-        // console.log(value)
-
-        setValues({...initialValues, name: value})
-    }
+      async function Update() {
+        await api.put(`/goals/${id}`, {
+            nome,
+            descricao,
+            data_inicio,
+            data_fim,
+            estado
+          })
+        .then(
+            swal({
+                title: "Meta atualizada com sucesso!",
+                icon: "success",
+                button: "OK",
+              })
+        )
+    }  
     
     async function Remove() {
         const res = window.confirm('Deseja realmente remover a meta?')
@@ -44,32 +55,36 @@ function GoalDetailsCard(props) {
         }
     }
 
+    useEffect(() => {
+        loadGoalDetails();
+      }, [])
+
     return (
         <S.DetailsArea>
             <S.DetailsBox>
                 <div className='nome-meta'>
-                    <input name='nome' placeholder={props.nome} onChange={e => onChange(e.target.name, e.target.value)}/>
+                    <input name='nome' value={nome} onChange={nome => setNome(nome.target.value)}/>
                 </div>
                 <div className='anotacao-meta'>
-                    <input className='texto-anotacao' name='descricao' value={props.descricao} onChange={onChange}/>
+                    <input className='texto-anotacao' name='descricao' value={descricao} onChange={descricao => setDescricao(descricao.target.value)}/>
                 </div>
 
                 <S.Date>
                     <span>Data Início:</span>
-                    <input name='data_inicio' value={props.data_inicio}  onChange={onChange}/>
+                    <input name='data_inicio' value={data_inicio} onChange={data_inicio => setDataInicio(data_inicio.target.value)}/>
 
                     <span>Data Fim:</span>
-                    <input name='data_fim' value={props.data_fim} onChange={onChange}/>
+                    <input name='data_fim' value={data_fim} onChange={data_fim => setDataFim(data_fim.target.value)}/>
 
                 </S.Date>
                 <div className='concluida'>
                     <div>Concluída
-                        <input name='estado' type='checkbox' value={props.estado} onChange={onChange}/>
+                        <input name='estado' type='checkbox' value={estado} onChange={estado => setEstado(estado.target.value)}/>
                     </div>
 
                     <div className='buttons'>
                         <Link to='/goals'>
-                            <button className='action-button' type='button' >SALVAR</button>
+                            <button className='action-button' type='button' onClick={Update}>SALVAR</button>
                             <button id='excluir-button' className='action-button' type='button' onClick={Remove}>EXCLUIR</button>
                         </Link>
                     </div>

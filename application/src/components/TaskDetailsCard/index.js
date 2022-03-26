@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 
 function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
     const { id } = useParams();
+    const setNome = useState(nome);
 
     async function Remove(){
         const res = window.confirm('Deseja realmente remover a tarefa?')
@@ -21,7 +22,8 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
         }
       }
 
-    async function Update() {
+    async function Update(e) {
+        e.preventDefault()
         await api.put(`/tasks/${id}`, {
             nome,
             anotacao,
@@ -43,7 +45,7 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
             <S.DetailsBox>
 
                 <div className='nome-tarefa'>
-                    <input onChange={e => e.target.value} value={nome}/>
+                    <input onChange={nome => setNome(nome.target.value)} value={nome}/>
                 </div>
                 <div className='anotacao-tarefa'>
                     <input className='texto-anotacao'value={anotacao}/>
