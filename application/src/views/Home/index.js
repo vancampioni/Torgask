@@ -53,7 +53,9 @@ function Home() {
             
             </div>
             <p>Para começar, clique no botão abaixo e assista ao nosso tutorial de primeiros passos:</p>
-            <button type='button'>PRIMEIROS PASSOS</button>
+            <a href='https://youtu.be/7W5tPWN2ZAA'>
+            <button type='button' >PRIMEIROS PASSOS</button>
+            </a>
           </S.Text>
         <Footer />
       </S.Container>

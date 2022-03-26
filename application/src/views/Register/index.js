@@ -66,8 +66,9 @@ function Register() {
         </S.Logo>
 
         <Formik
-          validationSchema={validations}
           initialValues={{}}
+          onSubmit={register}
+          validationSchema={validations}
         >
           
             <div className="login-page">
@@ -112,7 +113,7 @@ function Register() {
                   className="Login-Error"
                 />
 
-                  <button type='button' className="btn btn-primary" onClick={register}>CADASTRAR</button>
+                  <button type='submit' className="btn btn-primary" onClick={register}>CADASTRAR</button>
 
                 </Form>
               </div>
