@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import api from '../../services/api';
 import { useParams, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
-function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
+function TaskDetailsCard() {
     const { id } = useParams();
-    const setNome = useState(nome);
+    const [nome, setNome] = useState();
+    const [anotacao, setAnotacao] = useState();
+    const [assunto, setAssunto] = useState();
+    const [data, setData] = useState();
+    const [hora, setHora] = useState();
+    const [estado, setEstado] = useState();
+
+    async function loadTaskDetails() {
+        await api.get(`/tasks/${id}`)
+          .then(response => {
+            setNome(response.data.nome)
+            setAnotacao(response.data.anotacao)
+            setAssunto(response.data.assunto)
+            setData(response.data.data_agendada)
+            setHora(response.data.data_agendada)
+            setEstado(response.data.estado)
+          })
+      }
 
     async function Remove(){
         const res = window.confirm('Deseja realmente remover a tarefa?')
@@ -22,8 +39,7 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
         }
       }
 
-    async function Update(e) {
-        e.preventDefault()
+    async function Update() {
         await api.put(`/tasks/${id}`, {
             nome,
             anotacao,
@@ -40,30 +56,34 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
         )
     }  
 
+    useEffect(() => {
+        loadTaskDetails();
+      }, [])
+
     return (
         <S.DetailsArea>
             <S.DetailsBox>
 
                 <div className='nome-tarefa'>
-                    <input onChange={nome => setNome(nome.target.value)} value={nome}/>
+                    <input value={nome} onChange={nome => setNome(nome.target.value)}/>
                 </div>
                 <div className='anotacao-tarefa'>
-                    <input className='texto-anotacao'value={anotacao}/>
+                    <input className='texto-anotacao'value={anotacao} onChange={anotacao => setAnotacao(anotacao.target.value)}/>
                 </div>
                 <div className='assunto-tarefa'>
                     <span>Assunto:</span>
-                    <input className='texto-assunto' value={assunto}/>
+                    <input className='texto-assunto' value={assunto} onChange={assunto => setAssunto(assunto.target.value)}/>
                 </div>
                 <div className='data-tarefa'>
                     <S.Date>
                         <span>Data:</span>
-                        <input value={data}/>
+                        <input value={data} onChange={data => setData(data.target.value)}/>
 
                     </S.Date>
                 </div>
                 <div className='concluida'>
                     <div>Concluída
-                        <input type='checkbox' value={estado} />
+                        <input type='checkbox' value={estado} onChange={estado => setEstado(estado.target.value)}/>
                     </div>
                     <div className='buttons'>
                         <Link to='/tasks'>
