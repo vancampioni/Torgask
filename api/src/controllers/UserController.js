@@ -16,6 +16,13 @@ module.exports = {
         return res.json(users);
     },
 
+    async getById(req, res) {
+        const user_id = req.params;
+        const user = await User.findByPk(user_id);
+
+        return res.json(user);
+    },
+
     async create(req, res) {
         try {
             const { nome, email, senha } = req.body;

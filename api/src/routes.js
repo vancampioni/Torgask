@@ -8,6 +8,7 @@ const routes = express.Router();
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../src/config/jwt.json');
 const AuthController = require('./controllers/AuthController');
+const User = require('./models/User');
 
 function auth(req, res, next) {
     const token = req.headers['x-access-token'];
@@ -23,7 +24,8 @@ function auth(req, res, next) {
 routes.post('/auth', AuthController.login);
 
 // Users
-// routes.get('/users', auth, UserController.index);
+routes.get('/users', UserController.index);
+routes.get('/users/:id', UserController.getById);
 routes.post('/users', UserController.create);
 
 // Goals
@@ -37,8 +39,8 @@ routes.delete('/goals/:id',  GoalsController.delete);
 routes.get('/goal/:id/tasks', TaskController.getByGoal);
 routes.get('/tasks/:id', TaskController.getById);
 routes.post('/task', TaskController.create);
-routes.put('goal/:id/tasks/:id', TaskController.update);
-routes.delete('goal/:id/tasks/:id', TaskController.delete);
+routes.put('/tasks/:id', TaskController.update);
+routes.delete('/tasks/:id', TaskController.delete);
 routes.get('/tasks/filter/late', TaskController.late);
 routes.get('/tasks/filter/index', TaskController.index);
 routes.get('/tasks/filter/today', TaskController.today);

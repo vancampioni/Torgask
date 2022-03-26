@@ -18,11 +18,11 @@ module.exports = {
     },
 
     async create(req, res) {
-
-        const { user_id, nome, descricao, estado, data_inicio, data_fim } = req.body;
+        const { user_id } = req.params;
+        const { nome, descricao, estado, data_inicio, data_fim } = req.body;
 
         const goal = await Goal.create({ 
-            user_id: 44,
+            user_id,
             nome, 
             descricao, 
             estado,  
