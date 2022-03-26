@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import * as S from './styled';
 import api from '../../services/api';
 import { useParams, Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import format from 'date-fns/format';
 
-function TaskDetailsCard() {
+function TaskDetailsCard({data_agendada}) {
     const { id } = useParams();
     const [nome, setNome] = useState();
     const [anotacao, setAnotacao] = useState();
@@ -12,6 +13,7 @@ function TaskDetailsCard() {
     const [data, setData] = useState();
     const [hora, setHora] = useState();
     const [estado, setEstado] = useState();
+    
 
     async function loadTaskDetails() {
         await api.get(`/tasks/${id}`)
