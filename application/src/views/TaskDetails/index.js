@@ -10,7 +10,7 @@ import api from '../../services/api';
 // COMPONENTES
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import TaskCardDetails from '../../components/TaskDetailsCard';
+import TaskDetailsCard from '../../components/TaskDetailsCard';
 
 function TaskDetails() {
   const [lateCount, setLateCount] = useState();
@@ -55,7 +55,7 @@ function TaskDetails() {
   useEffect(() => {
     lateVerify();
     loadTaskDetails();
-  }, [])
+  }, [filterActived])
 
   return (
 
@@ -68,7 +68,7 @@ function TaskDetails() {
         <h3>DETALHES DA TAREFA</h3>
       </S.Title>
 
-      <TaskCardDetails
+      <TaskDetailsCard
         nome={nome}
         anotacao={anotacao}
         data={data}

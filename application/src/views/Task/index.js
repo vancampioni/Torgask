@@ -74,14 +74,15 @@ function Tasks() {
         <h3>TAREFAS</h3>
       </S.Title>
 
+      
+
+
+      <S.TaskCardArea>
       <Link to="/task">
         <div className="new-task">
           <img id='cadastrar-tarefa' src={plus} alt="Cadastrar Tarefa" />
         </div>
       </Link>
-
-
-      <S.TaskCardArea>
         {
           tasks.map(t => (
             <Link to={`/tasks/${t.id}`}>

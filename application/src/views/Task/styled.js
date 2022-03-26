@@ -3,17 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100%;
 
-    #cadastrar-tarefa {
-        width: 30px;
-    }
-
-    .new-task {
-        display-flex;
-        justify-content: flex-end;
-        margin-left: 1310px;
-        margin-top: 10px;
-        cursor: pointer;
-    }
+    
 `;
 
 export const FilterArea = styled.div`
@@ -35,6 +25,18 @@ export const TaskCardArea = styled.div`
     
     a {
         text-decoration: none;
+    }
+
+    #cadastrar-tarefa {
+        width: 30px;
+    }
+
+    .new-task {
+        display-flex;
+        justify-content: flex-end;
+        margin-left: 1310px;
+        margin-top: 10px;
+        cursor: pointer;
     }
 `
 

@@ -12,10 +12,10 @@ import api from '../../services/api';
 import Footer from '../../components/Footer';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
+
 function Login() {
   
   const history = useHistory();
-  const { user_id } = useParams();
 
   const handleSubmit = values => {
     api.post('/auth', values)
@@ -23,7 +23,7 @@ function Login() {
         const { data } = resp
         if (data) {
           localStorage.setItem('app-token', data)
-          history.push(`/home/${user_id}`)
+          history.push(`/home`)
         }
       })
   }

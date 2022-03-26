@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styled';
 import api from '../../services/api';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
     const { id } = useParams();
-    const { history } = useHistory();
 
     async function Remove(){
         const res = window.confirm('Deseja realmente remover a tarefa?')
@@ -21,6 +20,23 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
           )
         }
       }
+
+    async function Update() {
+        await api.put(`/tasks/${id}`, {
+            nome,
+            anotacao,
+            assunto,
+            estado,
+            data
+          })
+        .then(
+            swal({
+                title: "Tarefa atualizada com sucesso!",
+                icon: "success",
+                button: "OK",
+              })
+        )
+    }  
 
     return (
         <S.DetailsArea>
@@ -49,7 +65,7 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
                     </div>
                     <div className='buttons'>
                         <Link to='/tasks'>
-                        <button className='action-button' type='button' >SALVAR</button>
+                        <button className='action-button' type='button' onClick={Update}>SALVAR</button>
                         <button id='excluir-button' className='action-button' type='button' onClick={Remove} >EXCLUIR</button>
                         </Link>
                     </div>

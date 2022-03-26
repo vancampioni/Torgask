@@ -16,7 +16,6 @@ function Home() {
   const [lateCount, setLateCount] = useState(false);
   const [filterActived, setFilterActived] = useState('index');
   const [user, setUser] = useState();
-  const { user_id } = useParams();
 
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)

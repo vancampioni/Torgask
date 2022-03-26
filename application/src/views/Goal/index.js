@@ -15,11 +15,10 @@ function Goal() {
   const [filterActived, setFilterActived] = useState('index');
   const [goals, setGoals] = useState([]);
   const [lateCount, setLateCount] = useState();
-  const [user, setUser] = useState();
-  const { user_id } = useParams();
+  const user_id = useParams();
 
   async function loadGoals() {
-    await api.get(`/goals`)
+    await api.get(`users/${user_id}/goals`)
     .then(response => {
       setGoals(response.data)
       console.log(response.data)
@@ -33,13 +32,6 @@ function Goal() {
     })
   };
 
-  async function getUser() {
-    await api.get(`/users`)
-    .then(response => {
-      setUser(response.data.length)
-    })
-  };
-
   function Notification() {
     setFilterActived('late');
   }
@@ -48,7 +40,6 @@ function Goal() {
   useEffect(() => {
     loadGoals();
     lateVerify();
-    getUser();
   }, [filterActived])
   
 
@@ -69,7 +60,7 @@ function Goal() {
         <S.GoalCardArea>
         {
           goals.map(g => (
-          <Link to={`user/${user_id}/goals/${g.id}`}>
+          <Link to={`/goals/${g.id}`}>
             <GoalCard
               nome={g.nome}
             />  
