@@ -18,20 +18,22 @@ function NewGoal() {
   const [data_inicio, setDataInicio] = useState();
   const [data_fim, setDataFim] = useState();
   const [user, setUser] = useState();
-  const { user_id } = useParams();
   const history = useHistory();
 
   const [filterActived, setFilterActived] = useState('index');
   const [tasks, setTasks] = useState([]);
+  const response = localStorage.getItem('app-token');
+  const object = JSON.parse(response)
+  const user_id = object.user.id;
 
   const newGoal = () => {
-    api.post(`user/${user_id}/goals`, {
+    api.post(`/goal`, {
       nome: nome,
       descricao: descricao,
       estado: estado,
       data_inicio: data_inicio,
       data_fim: data_fim,
-      user_id: parseInt(user_id)
+      user_id: user_id
     }).then((response) => {
       if (response.status == 200) {
         swal({
@@ -48,9 +50,9 @@ function NewGoal() {
 
   async function getUser() {
     await api.get(`/users`)
-    .then(response => {
-      setUser(response.data.length)
-    })
+      .then(response => {
+        setUser(response.data.length)
+      })
   };
 
   async function lateVerify() {

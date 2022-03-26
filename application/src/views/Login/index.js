@@ -11,10 +11,10 @@ import api from '../../services/api';
 // COMPONENTES
 import Footer from '../../components/Footer';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { parse } from 'date-fns';
 
 
 function Login() {
-  
   const history = useHistory();
 
   const handleSubmit = values => {
@@ -22,8 +22,11 @@ function Login() {
       .then(resp => {
         const { data } = resp
         if (data) {
-          localStorage.setItem('app-token', data)
-          history.push(`/home`)
+          localStorage.setItem('app-token', JSON.stringify(data));
+          const response = localStorage.getItem('app-token');
+          const object = JSON.parse(response)
+          const user_id = object.user.id;
+          history.push(`/home`);
         }
       })
   }

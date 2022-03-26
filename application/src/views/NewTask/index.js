@@ -10,17 +10,20 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Dropdown } from 'bootstrap';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { id } from 'date-fns/locale';
 
 function NewTask() {
   const [lateCount, setLateCount] = useState();
-  const [goal_id, setGoalId] = useState([]);
   const [goal, setGoal] = useState([]);
+  const [goal_id, setGoalId] = useState('');
   const [estado, setEstado] = useState(false);
   const [nome, setNome] = useState();
   const [anotacao, setAnotacao] = useState();
   const [assunto, setAssunto] = useState();
   const [data, setData] = useState();
   const [hora, setHora] = useState();
+  
   const history = useHistory();
 
   async function lateVerify() {
@@ -35,17 +38,18 @@ function NewTask() {
     .then(response => {
       setGoal(response.data)
     })
-  }
+  } 
 
 
-  async function Save() {
+  async function Save(e) {
+    e.preventDefault()
     await api.post('/task', {
       nome,
       anotacao,
       assunto,
       estado,
       data_agendada: `${data}T${hora}`,
-      goal
+      goal_id: goal_id
       
     }).then(
       (response) => {
@@ -83,7 +87,6 @@ function NewTask() {
           <input type="text" onChange={e => setNome(e.target.value)} value={nome} />
 
 
-
         </S.Input>
         <S.TextArea>
           <textarea rows={5} placeholder="Anotações: "
@@ -105,12 +108,12 @@ function NewTask() {
             <p><input type="checkbox" checked={estado} onChange={() => setEstado(!estado)} />Concluída</p>
           </div>
           <div className='dropdown'>
-            <select >
+            <select name='goals' onChange={goal_id => setGoalId(goal_id.target.value)} value={goal_id}>
               {
                 goal.map(g => (
-                  <option onChange={e => setGoal(e.target.value)} value={goal.id}>{g.nome}</option>
-                ))
-              }
+                  <option value={g.id}>{g.nome}</option>
+                  ))
+                }
             </select>
           </div>
 

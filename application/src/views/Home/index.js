@@ -6,6 +6,7 @@ import smile from '../../assets/smile-wink.png';
 
 import api from '../../services/api';
 
+
 // COMPONENTES
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -15,8 +16,8 @@ import TaskCard from '../../components/TaskCard';
 function Home() {
   const [lateCount, setLateCount] = useState(false);
   const [filterActived, setFilterActived] = useState('index');
-  const [user, setUser] = useState();
-
+  const { id } = useParams();
+  
   async function lateVerify() {
     await api.get(`/tasks/filter/late`)
     .then(response => {

@@ -7,7 +7,8 @@ import bell from '../../assets/bell.png'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Header({ lateCount, clickNotification }) {
-
+    const { id } = useParams();
+    
     return (
       <S.Container>
         <S.LeftSide>

@@ -43,7 +43,7 @@ function TaskDetailsCard({nome, anotacao, assunto, data, estado}) {
             <S.DetailsBox>
 
                 <div className='nome-tarefa'>
-                    <input value={nome}/>
+                    <input onChange={e => e.target.value} value={nome}/>
                 </div>
                 <div className='anotacao-tarefa'>
                     <input className='texto-anotacao'value={anotacao}/>

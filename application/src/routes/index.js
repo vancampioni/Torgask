@@ -27,7 +27,7 @@ export default function Routes() {
                 <Route path="/home" exact component={Home} />
                 <Route path="/tasks" exact component={Task} />
                 {/* <Route path="/goal" exact component={NewGoal} /> */}
-                <Route path="user/:user_id/goal/:id" exact component={NewGoal} />
+                <Route path="/goal" exact component={NewGoal} />
                 <Route path="/task" exact component={NewTask} />
                 {/* <Route path="goal/:goal_id/task" exact component={NewTask} /> */}
                 <Route path="/tasks/:id" exact component={TaskDetails} />

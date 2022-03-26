@@ -18,7 +18,7 @@ function Goal() {
   const user_id = useParams();
 
   async function loadGoals() {
-    await api.get(`users/${user_id}/goals`)
+    await api.get(`/goals`)
     .then(response => {
       setGoals(response.data)
       console.log(response.data)

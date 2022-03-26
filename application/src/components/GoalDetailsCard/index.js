@@ -1,13 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 import api from '../../services/api';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 
-function GoalDetailsCard({ nome, descricao, data_inicio, data_fim, estado }) {
+function GoalDetailsCard(props) {
     const { id } = useParams();
+     let name = props.nome
+    const [initialValues, setInitialValues]  = useState({
+        nome: name,
+        descricao: props.descricao,
+        data_inicio: props.data_inicio,
+        data_fim: props.data_fim,
+        estado: props.estado
+    }) 
+    useEffect(() => {
+        setInitialValues()
+        console.log(initialValues)
+    }, [initialValues])
+    const [values, setValues] = useState(initialValues);
+    console.log(initialValues)
 
+    function onChange(name, value) {
+        // const { name, values } = event.target;
+        //console.log(nome)
+        // console.log(value)
+
+        setValues({...initialValues, name: value})
+    }
+    
     async function Remove() {
         const res = window.confirm('Deseja realmente remover a meta?')
         if (res == true) {
@@ -26,23 +48,23 @@ function GoalDetailsCard({ nome, descricao, data_inicio, data_fim, estado }) {
         <S.DetailsArea>
             <S.DetailsBox>
                 <div className='nome-meta'>
-                    <input value={nome} />
+                    <input name='nome' placeholder={props.nome} onChange={e => onChange(e.target.name, e.target.value)}/>
                 </div>
                 <div className='anotacao-meta'>
-                    <input className='texto-anotacao' value={descricao} />
+                    <input className='texto-anotacao' name='descricao' value={props.descricao} onChange={onChange}/>
                 </div>
 
                 <S.Date>
                     <span>Data Início:</span>
-                    <input value={data_inicio} />
+                    <input name='data_inicio' value={props.data_inicio}  onChange={onChange}/>
 
                     <span>Data Fim:</span>
-                    <input value={data_fim} />
+                    <input name='data_fim' value={props.data_fim} onChange={onChange}/>
 
                 </S.Date>
                 <div className='concluida'>
                     <div>Concluída
-                        <input type='checkbox' value={estado} />
+                        <input name='estado' type='checkbox' value={props.estado} onChange={onChange}/>
                     </div>
 
                     <div className='buttons'>
