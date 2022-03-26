@@ -29,10 +29,10 @@ routes.get('/users/:id', UserController.getById);
 routes.post('/users', UserController.create);
 
 // Goals
-routes.get('/goals', GoalsController.index);
+routes.get('/users/:user_id/goals', GoalsController.index);
 routes.get('/goals/:id', GoalsController.goalById);
-routes.post('/goals', GoalsController.create);
-routes.put('/goals/:id',  GoalsController.update);
+routes.post('/users/:user_id/goals', GoalsController.create);
+routes.put('/users/:user_id/goals/:id',  GoalsController.update);
 routes.delete('/goals/:id',  GoalsController.delete);
 
 // Tasks

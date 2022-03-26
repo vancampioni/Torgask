@@ -4,16 +4,15 @@ const current = new Date();
 
 module.exports = {
     async index(req, res) {
-
+        const { user_id } = req.params;
         const goals = await Goal.findAll();
 
         return res.json(goals);
     },
 
     async goalById(req, res) {
-        const { goal_id } = req.params
-        
-        const goal = await Goal.findByPk(goal_id);
+        const { id } = req.params
+        const goal = await Goal.findByPk(id);
         return res.json(goal);
     },
 
