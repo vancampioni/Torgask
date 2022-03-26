@@ -17,8 +17,7 @@ module.exports = {
     },
 
     async create(req, res) {
-        const { user_id } = req.params;
-        const { nome, descricao, estado, data_inicio, data_fim } = req.body;
+        const { nome, descricao, estado, data_inicio, data_fim, user_id } = req.body;
 
         const goal = await Goal.create({ 
             user_id,
@@ -34,19 +33,12 @@ module.exports = {
 
     async update(req, res) {
         try {
-            const { user_id } = req.params;
 
             const { nome, descricao, estado, data_inicio, data_fim } = req.body;
-
-            const user = await User.findByPk(user_id);
-            if (!user) {
-                return res.status(400).json({ error: 'User not found' });
-            }
 
             await Goal.update(
                 { nome, descricao, estado, data_inicio, data_fim },
                 {
-                    where: { user_id: req.params.user_id },
                     where: { id: req.params.id }
                 }
             )

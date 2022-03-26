@@ -34,7 +34,6 @@ module.exports = {
     },
 
     async create(req, res) {
-
         const { nome, anotacao, assunto, estado, data_agendada, goal_id } = req.body;
 
         const task = await Task.create({ 
@@ -43,7 +42,7 @@ module.exports = {
             assunto,
             estado, 
             data_agendada, 
-            goal_id: 1,  
+            goal_id  
         });
 
         return res.json(task);
@@ -51,10 +50,10 @@ module.exports = {
 
     async update(req, res) {
         try {
-            const { nome, anotacao, assunto, estado, data_agendada, goal_id } = req.body;
+            const { nome, anotacao, assunto, estado, data_agendada } = req.body;
 
             await Task.update(
-                { nome, anotacao, assunto, estado, data_agendada, goal_id },
+                { nome, anotacao, assunto, estado, data_agendada },
                 {
                     where: { id: req.params.id }
                 }

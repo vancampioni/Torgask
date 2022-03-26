@@ -25,14 +25,14 @@ routes.post('/auth', AuthController.login);
 
 // Users
 routes.get('/users', UserController.index);
-routes.get('/users/:id', UserController.getById);
+routes.get('/users/:email', UserController.getUser);
 routes.post('/users', UserController.create);
 
 // Goals
-routes.get('/users/:user_id/goals', GoalsController.index);
+routes.get('/goals', GoalsController.index);
 routes.get('/goals/:id', GoalsController.goalById);
-routes.post('/users/:user_id/goals', GoalsController.create);
-routes.put('/users/:user_id/goals/:id',  GoalsController.update);
+routes.post('/goal', GoalsController.create);
+routes.put('/goals/:id',  GoalsController.update);
 routes.delete('/goals/:id',  GoalsController.delete);
 
 // Tasks

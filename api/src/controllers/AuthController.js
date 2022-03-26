@@ -48,6 +48,6 @@ module.exports = {
         // const email = req.body.email;
         // const senha = req.body.senha;
 
-        // const user = await User.findOne({ where: { email: email } });
+        
     }
 }

@@ -16,11 +16,11 @@ module.exports = {
         return res.json(users);
     },
 
-    async getById(req, res) {
-        const user_id = req.params;
-        const user = await User.findByPk(user_id);
-
-        return res.json(user);
+    async getUser(req, res) {
+        const { email } = req.params
+        const { id } = req.params
+        const user = await User.findOne({ where: { email: email } });
+        return res.json(id);
     },
 
     async create(req, res) {
